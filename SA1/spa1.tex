@@ -19,7 +19,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 
-\usepackage[swissgerman]{babel}
+\usepackage[german]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{fancyhdr} % Required for custom headers
@@ -34,8 +34,8 @@
 
 \usepackage{pgf} 
 \usepackage{tikz}
-\usepackage{forest} % treees :D
-\usetikzlibrary{arrows,automata} %for FSM
+%\usepackage{forest} % treees :D
+%\usetikzlibrary{arrows,automata} %for FSM
 
 % Custom commands
 \DeclareMathOperator{\Kl}{Kl} %Klassen von Zuständen
@@ -246,16 +246,62 @@ Avoiding points.
 
 \begin{homeworkProblem}
 \begin{enumerate}[(a)]
-	\item
-		\( a_0 = 7 \\
-		a_1 = 1 + 2 * a_0 = 15 \\
-		\forall n \geq 2: a_n = 1 + 2 * \sum_{i=1}^{n} a_{i-1}, a_{n-1} = 1 + 2 * \sum_{i=1}^{n} a_{i-1} \\
-		a_n - a_{n-1} = 1 + 2 * \sum_{i=1}^{n} a_{i-1} - ( 1 + 2 * \sum_{i=1}^{n} a_{i-1} ) = 2 * a_{n-1}\\
-		\Rightarrow a_n = 3 * a_{n-1} = ...  = 3 ^ {n-1} * a_1 = 3^{n-1} * 15 \\
-		\)
-	\item
-	\item
-	\item
+	\item 			% (a)
+		\( a_0 = 7, a_1 = 1 + 2 * a_0 = 15 \\
+		\forall n \geq 2: \)
+		\begin{align}
+		 a_n &= 1 + 2 * \sum_{i=1}^{n} a_{i-1} \\
+		 a_{n-1} &= 1 + 2 * \sum_{i=1}^{n} a_{i-1} \\
+		\Rightarrow a_n - a_{n-1} &= 1 + 2 * \sum_{i=1}^{n} a_{i-1} - ( 1 + 2 * \sum_{i=1}^{n} a_{i-1} ) = 2 * a_{n-1}\\
+		\Rightarrow a_n & = 3 * a_{n-1} \\
+		&= \dots \\
+ 		&= 3 ^ {n-1} * a_1 \\
+		&= 3^{n-1} * 15 \\
+		\end{align}
+	\item 			% (b)
+		\( L_n := length\ of\ a\ central\ path\ in\ a\ BST\ of\ size\ n\ nodes\ \\
+		l_n := \mathbb{E}(L_n) \\
+		l_0 = 0, l_1 = 1, l_2 = 1/2 \cdot 2 + 1/2 \cdot 1 = 3/2\\
+		\forall n \geq 3:\)
+		\begin {align}
+			l_n &= \sum_{i=1}^{n} ( \mathbb{E}[L_n | root = i] \cdot \Pr[root=i] ) \\
+			&=  \sum_{i=1}^{n} ( \mathbb{E}[L_n | root = i] \cdot 1/n ) \\
+  			&=  1/n \cdot \sum_{i=1}^{n} ( \mathbb{E}[L_n | root = i]) \\
+    			&=  1/n \cdot \sum_{i=1}^{n} ( \mathbb{E}[L_{i-1}] +1) \\
+ 			&=  1 + 1/n \cdot \sum_{i=1}^{n} (l_{i-1}) \\
+		\end{align}
+		Furthermore, \( l_{n-1} = 1/n \cdot \sum_{i=1}^{n-1} (l_{i-1}) \)
+ 		\begin {align}
+		  	n \cdot l_n - (n-1) \cdot  l_{n-1} &= n +  \sum_{i=1}^{n} (l_{i-1}) - ((n-1) +  \sum_{i=1}^{n-1} (l_{i-1}) \\
+			&= 1 + l_{n-1} \\
+			\Rightarrow n \cdot l_n &= 1 + n \cdot l_{n-1} \\
+			\Rightarrow l_n &= 1/n +  l_{n-1} \\
+			&= 1/n +  1/(n-1) + \dots + l_3 + l_2 \\
+ 			&= 1/n +  1/(n-1) + \dots + l_3 + 3/2 \\
+  			&= 1/n +  1/(n-1) + \dots + l_3 + 1/2 + 1 \\
+  			&= H_n \\
+ 		\end{align}
+		We see that this also holds for \(n=2\) and \(n=1\) and therefore: \( \forall n \in \mathbb{N} - \{0\}. \)
+	\item  			% (c)
+		\( P_0^{(1)} = P_1^{(1)} = P_2^{(1)} = 0, P_3^{(1)} = 1/3, P_4^{(1)} = 1/4 \cdot 1/3 = 1/12 \\ 	
+		\forall n \geq 5: \)
+		\begin{align}
+			P_n^{(1)} &= \sum_{i=1}^n (( P_n^{(1)} | root=i) \cdot \Pr[root=i]) \\
+			&= \sum_{i=1}^n (( P_n^{(1)} | root=i) \cdot 1/n \\
+			&= 1/n \cdot \sum_{i=1}^n (( P_n^{(1)} | root=i)   \\
+			&= 1/n \cdot \sum_{i=1}^n P_{i-1}^{(1)}   \\
+		\end{align}
+		Furthermore, \( P_{n-1}^{(1)} =  1/(n-1) \cdot \sum_{i=1}^{n-1} (( P_{i-1}^{(1)} | root=i) \)
+		\begin{align}
+			\Rightarrow n \cdot P_n^{(1)} - (n-1) \cdot P_{n-1}^{(1)} &= \sum_{i=1}^n P_{i-1}^{(1)} - ( \sum_{i=1}^{n-1} P_{i-1}^{(1)} ) \\
+			&= P_{n-1}^{(1)} \\
+			\Rightarrow n \cdot P_n^{(1)} &= n \cdot P_{n-1}^{(1)} \\
+			\Rightarrow P_n^{(1)} &=  P_{n-1}^{(1)} \\
+			&=  P_{n-2}^{(1)} = \dots =  P_{4}^{(1)} \\
+			&= 1/12
+		\end{align}
+		We see that this also holds for \(n=4\) and therefore: \( \forall n \in \mathbb{N}, n \geq 4. \)
+	\item 			% (d)
 \end{enumerate}
 \end{homeworkProblem}
 
