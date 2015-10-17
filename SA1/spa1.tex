@@ -230,8 +230,34 @@
 %	PROBLEM 1
 %----------------------------------------------------------------------------------------
 
-\begin{homeworkProblem} 
-Avoiding points.
+\begin{homeworkProblem}
+Let $P$ be the input set of points with $|P| = n$, with general position.
+
+\begin{enumerate}[(1)]
+\item - \(\mathcal{O}(n \cdot log(n)) \) \\
+	Compute the Convex Hull of the set $P$ and add all $. \in P$ to the queue $Q$. Runtime boundaries and correctnes can be guaranteed by using, for instance, Graham's algorithm,
+\item - \(\mathcal{O}(n \cdot log(n)) \) \\
+	Compute the Voronoi diagram of the set $P$. Runtime boundaries and correctnes can be guaranteed by using, for instance, Fortune's algorithm.
+\item - \(\mathcal{O}(n \cdot log(n)) \) \\
+	Determine all intersections of the edges of the Voronoi diagram with the convex hull. Add every intersection to the queue $Q$, while saving a reference from the intersection point to the neighbouring points from the initial graph. A single intersection can be determined within \(\mathcal{O}(log(n))\) time. [1] There are only \(\mathcal{O}(n)\) edges in the Voronoi diagram [2], therefore we query intersections \(\mathcal{O}(n)\) many times. This yields an overall runtime of \(\mathcal{O}(n \cdot log(n)) \).
+\item - \(\mathcal{O}(n) \) \\
+	Iterate over all items in the queue. For each, check what the minimal distance to its closest point is. Save the maximum of the current value, initialized with 0 and the minimal distance to a neighbouring point of P. 
+\item - \(\mathcal{O}(1) \) \\
+	Return the point associated with the maximum value.
+\end{enumerate}
+
+\emph{Soundness} \\
+If an point $p$ is returned by the algorithm, it is either part of $P$ or an intersection of a Voronoi diagram edge and the convex hull, i.e. a point lying on the interior of a segment of the convex hull.
+\begin{enumerate} [a)]
+\item $p \in P$ \\
+	By definition, we know the three closest points of $P$ from $p$ as well as the minimum of the distances to them. Therefore, the radius can simply be defined as this distance, which assures that no $p' \in P$ is also $p' \in Int(C)$. As the only $p \in P$ populating $Q$ come from the convex Hull, we assure that $c \in conv(P)$ by defining $c = p$. 
+\item $p \notin P$
+	
+\end{enumerate}
+\emph{Completeness}
+
+[1] APC script, Chapter 2.1 Point/Line Relative to a Convex Polygon, paragraph 'A Line Hiiting a Convex Polygon', p. 40  
+[2] APC script, Chapter 2.3 Planar Point Location - More exmaples, paragrahp 'Closest Point in the Plane - the Post offce Problem', p.55
 \end{homeworkProblem}
 %----------------------------------------------------------------------------------------
 %	PROBLEM 2
