@@ -364,7 +364,8 @@ It suffices to consider the 'odd' case, as the 'even' or 'odd and even' cases ar
     			&=  1/n \cdot \sum_{i=1}^{n} ( \mathbb{E}[L_{i-1}] +1) \\
  			&=  1 + 1/n \cdot \sum_{i=1}^{n} (l_{i-1}) \\
 		\end{align}
-		Furthermore, \( l_{n-1} = 1/n \cdot \sum_{i=1}^{n-1} (l_{i-1}) \)
+		Instead of recurring with two different expectations, one for going left and one for going right, we reduce the problem to always going left. In other words, this problem is equivalent to the expected length of the left spine. The legitimacy of this statement follows from the fact that we assume our binary search tree to be u.a.r. This tells us, that when 'arriving' at a node, we expect equal left and right subtrees, as they are random search trees themselves and the root was u.a.r. as well. In other words the decision which 'direction' we take is irrelevant when considering the expected length of the path.  \\
+		Analogously, \( l_{n-1} = 1/n \cdot \sum_{i=1}^{n-1} (l_{i-1}) \).
  		\begin {align}
 		  	n \cdot l_n - (n-1) \cdot  l_{n-1} &= n +  \sum_{i=1}^{n} (l_{i-1}) - ((n-1) +  \sum_{i=1}^{n-1} (l_{i-1}) \\
 			&= 1 + l_{n-1} \\
@@ -463,6 +464,31 @@ It suffices to consider the 'odd' case, as the 'even' or 'odd and even' cases ar
 		
 	\item %(c)
 	\item %(d)
+	Let's prove the inequality for all n by inducing over subtrees.
+	
+	\emph{Base cases} \\
+	\( \mathbb{E}[f(T_0)] = 0, \mathbb{E}[f(T_1)] = 1, \mathbb{E}[f(T_2)] = 1 \) \\
+	From $n=1$ we see that $c \geq \frac{1}{3}$. Given this, the inequality clearly holds for the base cases.
+	
+	\emph{Induction hypothesis} \\
+	Assume that for an arbitrary $n \geq 3$:
+	\[ \forall k<n: \mathbb{E}[f(T_k)] \leq \frac{2}{3}n + c \]
+	\emph{Induction step} \\
+	As we consider $n \geq 3$, the root contains two roots $i$ and $j$ with $i<j$. 
+	\begin{align}
+		\mathbb{E}[f(T_n)] &= \sum_{j=1}^n \sum_{i=1}^{j-1} \mathbb{E}[f(T_n)|root=\{i,j\}] \cdot \Pr[root=\{i,j\}] \\
+		&= \Pr[root=\{i,j\}] \cdot \sum_{j=1}^n \sum_{i=1}^{j-1} \mathbb{E}[f(T_{i-1})] + \mathbb{E}[f(T_{j-i-1})] + \mathbb{E}[f(T_{n-j})] + 1 \\
+		&= \frac{1}{{n \choose 2}} \cdot \sum_{j=1}^n \sum_{i=1}^{j-1} \mathbb{E}[f(T_{i-1})] + \mathbb{E}[f(T_{j-i-1})] + \mathbb{E}[f(T_{n-j})] + 1 \\
+		& \leq \frac{1}{{n \choose 2}} \sum_{j=1}^n \sum_{i=1}^{j-1} (\frac{2}{3}(i-1) + c) + (\frac{2}{3}(j-i-1) + c) + (\frac{2}{3}(n-j) + c) \\
+		& \leq \frac{1}{{n \choose 2}} \sum_{j=1}^n \sum_{i=1}^{j-1} \frac{2}{3}i - \frac{2}{3}i + \frac{2}{3}j - \frac{2}{3}j + \frac{2}{3}n -\frac{2}{3} -\frac{2}{3} + 3c \\
+		& \leq \frac{1}{{n \choose 2}} \sum_{j=1}^n \sum_{i=1}^{j-1} \frac{2}{3}n -\frac{4}{3} + 3c\\
+		& \leq \frac{1}{{n \choose 2}} \frac{n\cdot(n-1)}{2} \cdot (\frac{2}{3}n -\frac{4}{3} + 3c) \\
+		& \leq \frac{2}{{n\cdot (n-1)}} \frac{n\cdot(n-1)}{2} \cdot (\frac{2}{3}n -\frac{4}{3} + 3c) \\
+		& \leq \frac{2}{3}n -\frac{4}{3} + 3c\\
+	\end{align}
+	In order to validate the induction, we have to make sure that the initial claim holds, i.e. that the constant term stays the same.
+	\[c = - \frac{4}{3} + 3c \Rightarrow c= \frac{2}{3} \]
+	It remains to check, whether this is sound with the condition we recoginzed in the base case. It obviously does and therefore the induction holds.
 	\item %(e)
 	Suppose the assumption of (d) still holds, i.e. $T_n$ is a u.a.r. ternary search tree. No matter what the definition of the search tree looks like, we can assume to that our root keys indicate the direction in which to go depending on the current key. No matter what this mapping looks like, as it is based on the search tree property, we can expect a u.a.r. distribution of keys onto the resepctive subtrees.\\
 	For simplicity, assume that the set of keys is $[n]$.
