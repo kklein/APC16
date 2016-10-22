@@ -38,7 +38,7 @@
 %\usetikzlibrary{arrows,automata} %for FSM
 
 % Custom commands
-\DeclareMathOperator{\Kl}{Kl} %Klassen von ZustÃÂ¤nden
+\DeclareMathOperator{\Kl}{Kl} %Klassen von ZustÃÂÃÂ¤nden
 
 \usepackage{mathtools}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
@@ -306,6 +306,15 @@ A point $p$ we did not consider as a Posible solution is either lying inside the
 
 \begin{enumerate}[a)]
 \item
+	In order to prove that 
+	\[ \mathbb{E}[A_i^j] = \frac{p(j)}{\sum_{l=min \{i,j\}}^{max\{i,j\}}p(l)}\]
+	we consider the following case distinctions:
+	\begin{enumerate}[(i)]
+	\item $i = j$
+	\item $i = 1$ and $j = n$ 
+	\item $n > j-i+1$ and $root \in \{min\{i,j\},max\{i,j\}\}$
+	\item $n > j-i+1$ and $root \notin \{min\{i,j\},max\{i,j\}\} $
+	\end{enumerate}
 \item
 \item
 \end{enumerate}
