@@ -307,65 +307,28 @@ By direct application of definitions: \\
 		Therefore, we can now look at the respective subtree containing $i$ and $j$ in an isolated fashion, as we know that the current root does not contribute anything to the notion we look at. In the base case in which $n=2$, we can either apply (i) if $i$ and $j$ are equal and (ii) if they're not. For $n>2$, we can inductively apply cases (i), (ii), (iii), (iv) and (v).
 	\end{enumerate}
 
-\item % 2 b)
-\item
-\end{enumerate}
-\begin{enumerate}[(a)]
-\item % (a)
-	Let's say the blue points are indexed by $p_1 \dots p_i$ and the red points indexed bei $p_{i+1} \dots p_n$.
-	\begin{enumerate}[(1)]
-	\item - \(\mathcal{O}(n) \) \\
-		For every point $p = (a,b)$ generate the line $p^* = (a,-b)$. Chose an arbitrary red line and an arbitrary blue line and check which one is above. For the color being above, define the halfspace for every line of this color to point downwards. The lines of the opposite color point upwards.
-	\item - \(\mathcal{O}(n) \) \\
-		Compute the intersection of those halfspaces.
-	\item - \(\mathcal{O}(1) \)\\
-		If existent, return an the dual an arbitrary point of the intersection, i.e. one of the Posible intersecting lines.
-	\end{enumerate}
-	\emph{Correctness} \\
-	In order to prove correctness, it suffices to show that the problem that we want to solve and the we solve are equivalent. \\
-	Assume that if a seperation exists, the blue points are above, the opposite is analogous. We want to find a line $l$ for which the following holds: \\
-	\(l = (a,b), \forall p_k =(a_k, b_k) \in P:\)
-	\[
-	\begin{cases}
-		b_k > a \cdot a_k + b  & k \in \{1 \dots i \}\         \text{i.e. every blue point lies above $l$}   \\
-	 	b_k < a \cdot a_k + b   & k \in \{i+1 \dots n\}\       \text{i.e. every red point lies below $l$}   \\
-	 \end{cases}
-	 \]
-	We can algebraically rewrite this as the following system of equations:
-	\[
-	\begin{cases}
-	-b > a_k*a - b_k & k \in \{1 \dots i \}\ \text{i.e. every blue line lies above point $l^*$}\\
-	-b < a_k*a - b_k & k \in \{i+1 \dots n \}\ \text{i.e. every red line lies below $l^*$}\\
-	\end{cases}
-	\]
-	This is equivalent to the statement, that every line $p_k^*, k \in \{1, \dots, n\}$ has to be above the point $l^*$ if red and below if blue. In order to determine the region in which such a point could be placed in, we can determine the intersection of the halfspaces - pointing upwards for the lines which have to be below and downwards in the other case. If the intersection is empty, there cannot be a point above all red lines and below all blue lines. If it is non-empty, any point inside of it fullfills the requirements. The concepts of duality allows us to retranslate this point to a line, which preserves the necessary properties. 
-\item % (b)
-The line $l$ lets us seperate the points into $R_l$ and $B_l$. We can translate each of those sets into sets of lines, by the standard duality transformation. Lets say the sets contain i and j lines respectively. For now we consider $R_l$, as $B_l$ is analogous. Furthermore we are aware of the fact that in each set, the number of lines is odd.  Therefore, when searching for the $\ceil[\big]{\frac{i}{2}}$ level, we are looking for a set of points, which has $ \lfloor \frac{i}{2} \rfloor$ lines above and $ \lfloor \frac{i}{2} \rfloor$ lines below. It follows that this leads us to a curve.  \\
-When observing the curve from the left side of the leftmost intersection of our lines and the right side of the rightmost intersection of our lines, the curve is the same line, i.e. the line with the median slope. This is clear because without intersections, the k-level is trivially determined. In other words, the lines below the k-level on the right side will be above it on the right side and vice versa. It also follows that When pointing downwards on one extreme side, the k-level points upwards on the other extreme.\\
-In the finite range, where intersections of lines happen, the k-level is not necessarily this line. However the k-level is still certain to be steady, according to the definition of the k-level. \\
-Every statement applied to $R_l$ applies to $B_l$. \\
-As there is no pairwise equality of $x$-coordinates among the initial points, inexistence of pairwise equality of slopes follows for the lines, i.e. no two lines of $R_l$ and $B_l$ are parallel. \\
-This means that when looking at the individual k-level of $R_l$ and $B_l$ combined, both have to intersect, as their k-level are apart from a finite range, non-parallel lines. Inside this finite range, they are still steady curves. \\
-When converting this intersection back to the initial perspective of the duality, this point is equivalent to a line, which bisects the points of $R_l$ and $B_l$ as the intersection was a point which had $ \lfloor \frac{i}{2} \rfloor$ lines of $R_l$ above and below and $ \lfloor \frac{|B_l|}{2}$ lines of $B_l$ above and below. This immediately from duality. Therefore a bisection must exist. \\
-It suffices to consider the 'odd' case, as the 'even' or 'odd and even' cases are analogous apart from the fact that the k-levels don't need be curves, but are allowed to be areas.1
+\item % 2 b) 
+	We want to prove that \\
+	\[ \forall x,y \in \mathbb{R} \ s.t.\  0 \leq x < y: \frac{x}{y} \leq ln(y) - ln(y-x)\]
+	As we know that $x < y$, we can formulate the following
+	\[ \exists \  \delta \in \mathbb{R} \ s.t. \ \delta>0 \ and \  x=y-\delta \]
+	We know that INSERT NAME HERE \(\forall x \in \mathbb{R}: 1+x \leq e^x \). With $z = ln(\frac{\delta}{y})$ we get the following:
+	\begin{align}
+		& 1 + ln(\frac{\delta}{y}) \leq e^{ln(\frac{\delta}{y})} \\
+		& \Leftrightarrow 1 - ln(\frac{y}{\delta}) \leq \frac{\delta}{y} \\
+		& \Leftrightarrow 1 - \frac{\delta}{y} \leq ln(\frac{y}{\delta}) \\
+		& \Leftrightarrow \frac{y-\delta}{y} \leq ln(\frac{y}{y-y+\delta}) \\
+		& \Leftrightarrow \frac{x}{y} \leq ln(\frac{y}{y - x - \delta + \delta}) \\
+		& \Leftrightarrow \frac{x}{y} \leq ln(\frac{y}{y - x}) \\
+		& \Leftrightarrow \frac{x}{y} \leq ln(y) - ln(y - x) \\
+	\end{align}
 
-\item % (c)
-	\emph{Preprocessing} \\
-	Given the points $P$, translate all of those to lines according to the standard dual transformation. Followingly determine the ranges from one line to another on the $y$-axis. This means that for any $y$, we can associate an interval, for which we know the first line above and first below. \\
-	As the input $l$ could lie in any of those intervals, we consider every 'seperation Posibility' of $P$,i.e. we are prepared for every Posible seperation $B_l \cup R_l = P$. \\
-	For any such seperation we do the following:
-	\begin{enumerate} [-]
-		\item compute the k-levels of $B_l$
-		\item compute the k-levels of $R_l$
-		\item determine the intersections of the k-levels, if several intersections Posible, chose an arbitrary point inside
-		\item save a mapping from the seperation-range to the intersection point in e.g. a hashtable
-	\end{enumerate}
-	The second-last step can be implemented by naively comparing the intervals/piecewise curves as we explicitly do not care for the runtime of the preprocessing. Obviously, there are much faster solutions to this step.\\
-	\emph{Querying}\\
-	When queried with a line $l: y=c$, all one has to do is to locate $l$, i.e. $c$ in the seperation ranges. This works even thogh we changed the points into lines, as we only consider the $x$-axis which preservers the repartition properties. An adapted balanced binary search tree can assure us logarithmic query time. Instead of saving keys, the tree could simply save ranges as our ranges cannot overlap. \\
-	\emph{Correctness} \\
-	The correctness of this algorithm follows directly from the definitions of the k-level, the properties of duality and the statements about the k-level-'line' from above.
+\item % 2 c)
+	We want to prove that 
+	\[ \forall i \in [n]: \mathbb{E} [D_n^{(i)}] \leq 2 \cdot ln(\frac{1}{p(i)}) \]
+	\[  \mathbb{E} [D_n^{(i)}] = \sum_{j=1}^{n}\mathbb{E}[A_i^j]\]
 \end{enumerate}
+
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------
