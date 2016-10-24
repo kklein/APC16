@@ -458,13 +458,17 @@ Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0].
 				$(ii)$ implies that $a\cdot x_j + y_j > a\cdot x_i + y_i$ or $(a\cdot x_j + y_j = a\cdot x_i + y_i$ and $ x_j > x_i)$. If the latter is true, we know that there is an intersection and the assumption was wrong.
 				Hence we now assume that $(a-\delta)\cdot x_i + y_i > (a-\delta)\cdot x_j + y_j$ and $a\cdot x_j + y_j > a\cdot x_i + y_i$. We define the function $f: \mathbb{R} \rightarrow \mathbb{R} with f(b) = b \cdot x_j + y_j - a\cdot x_i + y_i$. It follows immediately that $f(a-\delta) > 0$ and $f(a) < 0$. As $f$ is steady, the mean value theorem allows us to say that $\exists c \in \mathbb{R} s.t. f(c) = 0$. Therefore $c\cdot x_j + y_j = c\cdot x_i + y_i$, which is equivalent to an intersection. This, again, contradicts our fundamental assumption and proves our claim.\\
 				
-				We now know that the permutation only changes when there is an intersection and that its number of inversions is increased by the number of intersections in that intersection point. Hence, if we simply add up all the intersections we have from $x=-\infty$ up to and including $x=a$, this is equivalent to the number of inversions in the permutation from $x=-\infty$, compared to the permutation in $x=a$. As $L$ is ordered in such a fashion as the permutation would be in $=-\infty$, we have proven the correctness of our algorithm.
-				
-				
+				We now know that the permutation only changes when there is an intersection and that its number of inversions is increased by the number of intersections in that intersection point. Hence, if we simply add up all the intersections we have from $x=-\infty$ up to and including $x=a$, this is equivalent to the number of inversions in the permutation from $x=-\infty$, compared to the permutation in $x=a$. As $L$ is ordered in such a fashion as the permutation would be in $=-\infty$, we have proven the correctness of our algorithm. 
+				In particular we handle the less general cases of multiple lines intersecting in one point and parallel lines.				
 				
 	\end{enumerate}
 	
 \item % 3 c
+	Let's assume that $b < c$.
+	Our algorithm from b) is able to return us the number of intersections up to a given point $x=a$ by looking at the permutation of the lines in $x=a$, which has been defined in b) as well. By querying the algorithm for $x=a$ and $x=b$ we multiply its runtime by only a constant factor, yet are able to obtain the permutation of the lines in $x=a$ as well as $x=b$. \\
+	In order to make use of the algorithm from Fact B, we need to adapt our permutations, as we need to keep in mind that both $\pi_a$ and $\pi_b$ can include inversions simultaneously. We are only looking for inversions between both. More precisely, the algorithm will assume that no the baseline of no inversions is ${1..n}$. To make this fit with the shape of our apply a mapping which maps the $i$th element of $\pi_b$ to $i$ to both $\pi_b$ and $\pi_c$. This will 
+	make $\pi_c$ represent the set of inversions from $b$ to $c$. Therefore we can feed $\pi_c$ to the algorithm from Fact B and return its result. The runtime remains $\mathcal{O}(nlogn)$ as the algorithm from Fact B takes $\mathcal{O}(nlogn)$ after applying our algorithm of $\mathcal{O}(nlogn)$ from b) twice. 
+	If $c < b$, we symmetricaly apply the above. If $c = b$, we apply it with $b=c-\delta$ where $\delta$ is the smallest number possibly represented and $c=c$. 
 \item % 3 d
 
 \end{enumerate}
