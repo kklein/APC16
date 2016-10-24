@@ -417,32 +417,51 @@ Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0].
 		\item \textbf{Runtime analysis} \\
 		
 		\item \textbf{Correctnes} \\
-			We know that we are given the number of inversions between the ${1..n}$ and the permutation $\pi_a$, including permutations in $x=a$. \\
-			Hence we need to prove that the amount of inversions in the permutation $\pi_a$ is equal to the number of intersections of lines from $L$, up to and including $x=a$. We will do so by induction. In order to so so, we will first have to prove the very helpful claim that we can look at pairwise intersections without loss of generality. \\
-			\textit{Claim.} If there are two lines crossing in one point, the number of inversions in the permutation increases for exactly one in that point.  \\
-			\textit{Proof.} Given that we have an intersection of lines $l_1$ and $l_2$ in $x=a$, we know that $a \cdot x_1 + y_1 = a \cdot x_2 + y_2$. As the permutation is a total order, we know that either $x_1 < x_2$ or vice versa. Let's assume $x_1 < x_2$ (the opposite is symmetric), which implies that $\pi_a(l_2) < \pi_a(l_1)$ according to the definition of $\pi_a$. 
-				CHECK THIS IFF
-				\begin{align}
-					x_1 < x_2 & \Leftrightarrow x_1 \cdot \delta < x_2 \cdot \delta (\delta \in \mathbb{R}, \delta > 0) \\
-					& \Leftrightarrow -x_1 \cdot \delta > - x_2 \cdot \delta \\
-					& \Leftrightarrow x_1 \cdot a + y_1 - x_1 \cdot \delta > x_1\cdot a + y_1 - x_2 \cdot \delta \\
-					& \Leftrightarrow x_1 \cdot (a - \delta) + y_1 > x_2 \cdot a + y_2 -  x_2 \cdot \delta \\
-					& \Leftrightarrow x_1 \cdot (a - \delta) + y_1 > x_2 \cdot (a - \delta) + y_2 \\
-					& \Leftrightarrow \pi_{a-\delta}(l_1) < \pi_{a-\delta}(l_2) \\
-				\end{align}
-				Hence we can conclude that there is exactly one inversion of the permutation for one intersection, when considering only two lines. This extends to the general case, namely intersection of precisely two lines in a set of $n$ lines, as we know that the permutation of all other lines is unaffected. We can conclude this by the fact that the permutation represents the above relationship. When we have no further intersections, no further lines can change their above relationship.
-			
-			\textit{Claim:} Looking at the intersections of lines atomically, i.e. only considering intersections of two lines at a time, does not change the number of resulting inversions in the permutation as compared to considering all lines intersecting in one point together.\\
-			\textit{Proof:} 
-				Assume that we have k lines intersecting in one point. \\
-				When we look at the intersections in a pairwise manner, we realize that we have one inversion per two lines. Therefore we have exactly ${k \choose 2}$ many intersections. Our atomic point of view yields that we have one inversion per intersections, namely ${k \choose 2}$ inversions.
-				When we look at the intersection of all lines together
-			
-			\begin{enumerate}[-]
-				\item $x=a$ s.t. the leftmost intersection of a pair of lines is at $x=a$.
-				\item We had $k$ intersections for $x=a$ and now look at an additional intersection in $x=a+\delta$ with $\delta \in \mathbb{R}$ minimal. \\
+			We know that we are given the number of inversions in the permutation $\pi_a$, including permutations in $x=a$. \\
+			Hence we need to prove that the amount of inversions in the permutation $\pi_a$ is equal to the number of intersections of lines from $L$, up to and including $x=a$. We will do so by induction. \\ \\
+			\textit{Claim.} If there are $k$ lines crossing in one point, the number of inversions in the permutation increases for each pairwise intersection compared to infinitesimally left of this intersection point.  \\
+			\textit{Proof.} \\
+				\begin{enumerate}[-]
+				\item Let's inspect the base case with $k =2$. \\
+					Given that we have an intersection of lines $l_1$ and $l_2$ in $x=a$, we know that $a \cdot x_1 + y_1 = a \cdot x_2 + y_2$. As the permutation is a total order, we know that either $x_1 < x_2$ or vice versa. Let's assume $x_1 < x_2$ (the opposite is symmetric), which implies that $\pi_a(l_2) < \pi_a(l_1)$ according to the definition of $\pi_a$. 
+					CHECK THIS IFF
+					\begin{align}
+						x_1 < x_2 & \Leftrightarrow x_1 \cdot \delta < x_2 \cdot \delta (\delta \in \mathbb{R}, \delta > 0) \\
+						& \Leftrightarrow -x_1 \cdot \delta > - x_2 \cdot \delta \\
+						& \Leftrightarrow x_1 \cdot a + y_1 - x_1 \cdot \delta > x_1\cdot a + y_1 - x_2 \cdot \delta \\
+						& \Leftrightarrow x_1 \cdot (a - \delta) + y_1 > x_2 \cdot a + y_2 -  x_2 \cdot \delta \\
+						& \Leftrightarrow x_1 \cdot (a - \delta) + y_1 > x_2 \cdot (a - \delta) + y_2 \\
+						& \Leftrightarrow \pi_{a-\delta}(l_1) < \pi_{a-\delta}(l_2) \\
+					\end{align}
+					Hence we can conclude that there is exactly one inversion of the permutation for one intersection, when considering only two lines. This extends to the general case, namely intersection of precisely two lines in a set of $n$ lines, as we know that the permutation of all other lines is unaffected. We can conclude this by the fact that the permutation represents the above relationship. When we have no further intersections, no further lines can change their above relationship. \\
+				\item Now let's inspect the case for $k>2$.  \\
+					By the definition of the number of intersections, we have ${k \choose 2}$ many intersections for k lines in the point with $x$-value $a$. Our induction hypothesis tells us that those intersections give us ${k \choose 2}$ inversions in the permutation. As the new lines intersects all of the lines which already go through the point, we have ${k \choose 2} + k = {k+1 \choose 2}$ intersections. Given that we have an intersection of lines $l_i with i = 1,..,k $ and $l_k+1$ in $x=a$, we know that $a \cdot x_i + y_i = a \cdot x_{k+1} + y_{k+1}$. As the permutation is a total order, we know that either $x_i < x_{k+1}$ or vice versa for each individual $i$. We will simply say that for $k_1$ many it holds that $x_i < x_{k+1}$ and for $k_2 = k-k_1$ many $x_{k+1} < x_i$. In the analogous way to the base case, we know that
+						\begin{align}
+								&\forall i \in \{1..k_1\}\ x_i < x_{k+1} \\
+								&\Leftrightarrow \forall i \in \{1..k_1\}\ \pi_a(l_{k+1}) < \pi_a(l_i) \\
+								&\Leftrightarrow \pi_{a-\delta}(l_i) < \pi_{a-\delta}(l_{k+1}) \\
+						\end{align}
+					Hence we have $k_1$ inversions by the intersections with the lines $l_i, i \in 1..k_1$. Analogously:
+						\begin{align}
+								&\forall i \in \{k_2..k\}\  x_{k+1} < x_i \\
+								&\Leftrightarrow \forall i \in \{1..k_1\}\ \pi_a(l_i) < \pi_a(l_{k+1}) \\
+								&\Leftrightarrow \pi_{a-\delta}(l_{k+1}) < \pi_{a-\delta}(l_i) \\
+						\end{align}
+					Hence we have $k_2$ inversions by the intersections with the lines $l_i, i \in k_2..n$.
+					As we did not alter the relative order of the $k$ preexisting lines, we now that their permutation has not been influenced by the addition of the new line $l_{k+1}$. Thereby we are able to conclude that be are now confronted with ${k \choose 2} + k = {k+1 \choose 2}$ intersections leading to ${k \choose 2} + k_1 + k_2 = {k+1 \choose 2}$ inversions in the permutation at the point $x=a$.
 					
-			\end{enumerate}
+				\end{enumerate}
+			\textit{Claim.} There is no change permutation without intersection. \\
+			\textit{Proof.} \\
+				Assume that at point $x=a$ the permutation changes wihtout any lines intersecting in that point. We now that in the previous permutation $\pi_{new}$ there needs to be at least one additional inversion compared to $\pi_{old}$. Say  $\pi_{old}(l_i) < \pi_{old}(l_j) (i)$ and $\pi_{new}(l_i) > \pi_{new}(l_j) (i)$. We can simply say that the old permutation was at $x=a-\delta$ where $\delta \in \mathbb{R}, \delta >0$.\\
+				$(i)$ implies that $(a-\delta)\cdot x_i + y_i > (a-\delta)\cdot x_j + y_j$ or $((a-\delta) \cdot x_i + y_i = a\cdot x_j + y_j$ and $ x_i > x_j)$. If the latter is true, we know that there is an intersection and the assumption was wrong.
+				$(ii)$ implies that $a\cdot x_j + y_j > a\cdot x_i + y_i$ or $(a\cdot x_j + y_j = a\cdot x_i + y_i$ and $ x_j > x_i)$. If the latter is true, we know that there is an intersection and the assumption was wrong.
+				Hence we now assume that $(a-\delta)\cdot x_i + y_i > (a-\delta)\cdot x_j + y_j$ and $a\cdot x_j + y_j > a\cdot x_i + y_i$. We define the function $f: \mathbb{R} \rightarrow \mathbb{R} with f(b) = b \cdot x_j + y_j - a\cdot x_i + y_i$. It follows immediately that $f(a-\delta) > 0$ and $f(a) < 0$. As $f$ is steady, the mean value theorem allows us to say that $\exists c \in \mathbb{R} s.t. f(c) = 0$. Therefore $c\cdot x_j + y_j = c\cdot x_i + y_i$, which is equivalent to an intersection. This, again, contradicts our fundamental assumption and proves our claim.\\
+				
+				We now know that the permutation only changes when there is an intersection and that its number of inversions is increased by the number of intersections in that intersection point. Hence, if we simply add up all the intersections we have from $x=-\infty$ up to and including $x=a$, this is equivalent to the number of inversions in the permutation from $x=-\infty$, compared to the permutation in $x=a$. As $L$ is ordered in such a fashion as the permutation would be in $=-\infty$, we have proven the correctness of our algorithm.
+				
+				
+				
 	\end{enumerate}
 	
 \item % 3 c
