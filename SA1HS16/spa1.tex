@@ -38,7 +38,7 @@
 %\usetikzlibrary{arrows,automata} %for FSM
 
 % Custom commands
-\DeclareMathOperator{\Kl}{Kl} %Klassen von ZustÃÂÃÂÃÂÃÂ¤nden
+\DeclareMathOperator{\Kl}{Kl} %Klassen von ZustÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¤nden
 
 \usepackage{mathtools}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
@@ -192,7 +192,7 @@
 \newcommand{\hmwkTitle}{Special Assignment 1} % Assignment title
 \newcommand{\hmwkDueDate}{25\ October\ 2015} % Due date
 \newcommand{\hmwkClass}{Algorithms, Probability and Computing} % Course/class
-\newcommand{\hmwkClassInstructor}{} % Teacher/lecturer
+\newcommand{\hmwkClassInstructor}{}  % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{Kevin Klein} % Your name
 
 %----------------------------------------------------------------------------------------
@@ -232,7 +232,7 @@
 
 \begin{homeworkProblem}
 For this exercise, we assume that the relevant random binary search tree holds the set of elements $S$ of size $n$. Without loss of generality, we will assume that $S = \{1, n\}$ and in particular $i \in S \Rightarrow rank(i) = i$.
-Let's us the following recursive notation to express the structure of a binary search tree: $ (node)(leftSubtree)(rightSubtree)$.
+Let us the following recursive notation to express the structure of a binary search tree: $ (node)(leftSubtree)(rightSubtree)$.
 \begin{enumerate}[a)]
 \item % 1 a
 
@@ -407,14 +407,22 @@ Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0].
 		\item \textbf{Algorithm}
 			\begin{enumerate}[(1)]
 				\item We convert the set $L$ into a list $L$, such that from now on, there exists an order of the elements.
-				\item We define a total order in the list $L$ by sorting the list s.t. \(l_i,l_{i+1} \in L \Leftrightarrow x_i < x_{i+1} \) or $(x_i = x_{i+1}$ and $y_i > y_{i+1})$. As we know that there are no duplicates, this is a total order relation. Intuitively, this order represents the relative order of the lines for $x=-\infty$ in a way that $l_i$ lies above $l_{i+1}$ in $x=-\infty$.
+				%\item We define a total order in the list $L$ by sorting the list s.t. \(l_i,l_{i+1} \in L \Leftrightarrow x_i < x_{i+1} \) or $(x_i = x_{i+1}$ and $y_i > y_{i+1})$. As we know that there are no duplicates, this is a total order relation. Intuitively, this order represents the relative order of the lines for $x=-\infty$ in a way that $l_i$ lies above $l_{i+1}$ in $x=-\infty$.
 				\item We define a total order in $L$ by defining the permutation $\pi_{-\infty}:L \rightarrow \{1..n\}$. This permutation corresponds to relative order of the lines in $x=-\infty$. Intuitively, this order represents the relative order of the lines for $x=-\infty$ in a way that $l_i$ lies above $l_j$ in $x=-\infty$ iff $\pi_{-\infty}(l_i) < \pi_{-\infty}(l_j)$. Formally \(\pi_{-\infty}(l_i) < \pi_{-\infty}(l_j) \Leftrightarrow x_i < x_j \) or $(x_i = x_j$ and $y_i > y_j)$. As we do not have duplicates, this order is total and unambiguous.
 				\item We create a permutation $\pi_a: L \rightarrow \{1..n\}$ such that it corresponds to relative order of the lines in $x=a$. We arbitrarily define that a line is below the other if it intersects and has previously been above. Formally we sort s.t. $\pi_a(l_i) < \pi_a(l_j) \Leftrightarrow a\cdot x_i + y_i > a\cdot x_j + y_j$ or $(a\cdot x_i + y_i = a\cdot x_j + y_j$ and $ x_i > x_j)$.
 				\item We feed the algorithm from Fact A the permutation $\pi_a$.
 				\item We return the result from the algorithm of Fact A.
 			\end{enumerate}
 			
-		\item \textbf{Runtime analysis} \\
+		\item \textbf{Runtime analysis}
+			\begin{enumerate}[(1)]
+				\item A constant time operation.
+				\item We first need to evaluate the $n$ lines at a given $x$, which can be done in $\mathcal{O}(n)$. Sorting $n$ lines can be done by done in $\mathcal{O}(n\cdot log(n))$ time, because we use a constant time comparator.
+				\item Same as previous step.
+				\item The algorithm is given to have $\mathcal{O}(n\cdot log(n))$ runtime.
+				\item Constant time operation.
+			\end{enumerate}
+			As the considered parts of the algorithm are not nested but sequential, the overall runtime is $\mathcal{O}(n\cdot log(n))$.
 		
 		\item \textbf{Correctnes} \\
 			We know that we are given the number of inversions in the permutation $\pi_a$, including permutations in $x=a$. \\
@@ -467,11 +475,45 @@ Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0].
 	Let's assume that $b < c$.
 	Our algorithm from b) is able to return us the number of intersections up to a given point $x=a$ by looking at the permutation of the lines in $x=a$, which has been defined in b) as well. By querying the algorithm for $x=a$ and $x=b$ we multiply its runtime by only a constant factor, yet are able to obtain the permutation of the lines in $x=a$ as well as $x=b$. \\
 	In order to make use of the algorithm from Fact B, we need to adapt our permutations, as we need to keep in mind that both $\pi_a$ and $\pi_b$ can include inversions simultaneously. We are only looking for inversions between both. More precisely, the algorithm will assume that no the baseline of no inversions is ${1..n}$. To make this fit with the shape of our apply a mapping which maps the $i$th element of $\pi_b$ to $i$ to both $\pi_b$ and $\pi_c$. This will 
-	make $\pi_c$ represent the set of inversions from $b$ to $c$. Therefore we can feed $\pi_c$ to the algorithm from Fact B and return its result. The runtime remains $\mathcal{O}(nlogn)$ as the algorithm from Fact B takes $\mathcal{O}(nlogn)$ after applying our algorithm of $\mathcal{O}(nlogn)$ from b) twice. 
+	make $\pi_c$ represent the set of inversions from $b$ to $c$. Therefore we can feed $\pi_c$ to the algorithm from Fact B and return its result. The exptected runtime remains $\mathcal{O}(nlogn)$ as the algorithm from Fact B takes expected $\mathcal{O}(nlogn)$ runtime after applying our algorithm of $\mathcal{O}(nlogn)$ from b) twice. 
 	If $c < b$, we symmetricaly apply the above. If $c = b$, we apply it with $b=c-\delta$ where $\delta$ is the smallest number possibly represented and $c=c$. 
-\item % 3 d
 
-\end{enumerate}
+\item % 3 d
+We are looking at the up to $\frac{n(n-1)}{2}$ many lines that pairwise connect two points from our set. Among those lines, we look for the line with the median slope. This means that we are looking for the line $l=(x,y)$ with the median $x$-value. If we have multiple lines with the same slope, we can just pick any of those.  \\
+In order to apply our previous knowledge, we apply the dual transformation of points and lines. In the dual space, our $n$ points are $n$ lines. The lines connecting the $n$ points $p=(x,y)$ correspond to the intersections of the $n$ lines $p^*=(x,-y)$. Therefore, in the dual space, we are looking for one the intersection of lines, which has median $x$-value. \\
+	\textbf{Algorithm}
+	\begin{enumerate}[(1)]
+		\item First we transform all of our $n$ points to the set of lines $L$ by applying the duality transormation.
+		\item We don't know whether we have the full $\frac{n(n-1)}{2}$ many intersections, as we allow parallel lines. In order to find out, how many intersections we have in total, we query the algorithm from b) with $x = \infty$. We call the returned result $m$.
+		\item 
+			By applying the idea from c) we will do a binary search on intersections until we found the median. 
+			\begin{enumerate}[-]
+				\item Set $left$ to $-\infty$ and $right$ to $+\infty$. 
+				\item While $left$ is not equal to $right$:
+					\begin{enumerate}[-]
+						\item Query, as in c), a random pair of lines intersecting between $left$ and $right$. Determine their intersection point by solving the linear equation and call the $x$-value of that point $x_I$. 
+						\item Query the number of intersections in $-\infty$ and up to $x_I$, , by calling the algorithm from b) two separate times. 
+						\item If $result_{x_I} - result_{-\infty} > \frac{m}{2}$ we set $right$ to $x_I$. Else we set $left$ to $x_I - \delta$, with $\delta$ the smallest positive, non-zero number.
+					\end{enumerate}
+				\item When we have $left$ equal to $right$, we know the $x$ of the median intersection point. To get one particular intersection point, we query the algorithm from c) once again with $right$ and $right - \delta$. This will give us any two lines with an intersection point that is exactly on $right$.
+			\end{enumerate}
+	
+		\item Hence we have two lines  with an intersection point with median $x$-value among intersection points in the dual space. In order to return the the points giving the medium slope in the intial space, we transform those lines to points by the duality transformation and return those two points.
+	\end{enumerate}
+	\textbf{Expected runtime}
+		\begin{enumerate}[(1)]
+			\item Applying the constant time transformation on $n$ elements takes $\mathcal{O}(n)$ runtime. 
+			\item One application of the algorithm from b) takes $\mathcal{O}(n\cdot log(n))$ runtime. 
+			\item Per iteration of the loop we have one application of the algorithm from c) ($\mathcal{O}(n\cdot log(n))$), a constant time solution of a linear equation, and two applications of the algorithm from a) ($\mathcal{O}(n\cdot log(n))$). Hence one loop iteration has expected runtime of $\mathcal{O}(n\cdot log(n))$. \\
+			The important question is how many loop iterations we end up having. When looking at the behaviour of the algorithm carefully, we understand that it is performing a randomized binary search on the intersections. The expected number of calls in the binary search on $n$ elements is the equivalent of the depth of a random binary search tree of $n$ elements. We know that the exptected depth of a randomized binary search tree is asymptotically logarithmic in $n$. As we have up to $\frac{n(n-1)}{2}$ many intersections, we have expected $\mathcal{O}(log(\frac{n(n-1)}{2})) = \mathcal{O}(log(n))$ depth in the binary search tree, respectively as many calls in the binary search. \\
+			Followingly, we have expected $\mathcal{O}(log(n))$ loop iterations at expected $\mathcal{O}(n\cdot log(n))$ each, which gives us $\mathcal{O}(n\cdot log^2(n))$
+			\item One application of the algorithm from c) takes expected $\mathcal{O}(n\cdot log(n))$ runtime. 
+		\end{enumerate}
+		As the considered parts of the algorithm are not nested but sequential, the overall expected runtime is $\mathcal{O}(n\cdot log^2(n))$.
+
+	\end{enumerate}	
+	\textbf{Correctness} \\
+	
 
 \end{homeworkProblem}
 
