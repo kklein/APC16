@@ -38,7 +38,7 @@
 %\usetikzlibrary{arrows,automata} %for FSM
 
 % Custom commands
-\DeclareMathOperator{\Kl}{Kl} %Klassen von ZustÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¤nden
+\DeclareMathOperator{\Kl}{Kl} %Klassen von ZustÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¤nden
 
 \usepackage{mathtools}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
@@ -244,7 +244,7 @@ By direct application of definitions: \\
 \mathbb{E}[Z_3^{(1)}] 
  & = \frac{1}{6} \cdot \mathbb{E}[Z_3^{(1)} | (1)(2)(3)] + \frac{1}{6} \cdot \mathbb{E}[Z_3^{(1)} | (1)(3)(2)] + \frac{1}{3} \cdot \mathbb{E}[Z_3^{(1)} | (2)(1)(3) ]  \\
  & + \frac{1}{6} \cdot \mathbb{E}[Z_3^{(1)} | (3)(1)(2)] + \frac{1}{6} \cdot \mathbb{E}[Z_3^{(1)} | (3)(2)(1)] \\
- & = \frac{1}{2} \cdot (1 + 2 + 2 + 1 + 1)  = \frac{7}{6}
+ & = \frac{1}{6} \cdot (1 + 2 + 2 + 1 + 1)  = \frac{7}{6}
 \end{align}
 \begin{align}
 \mathbb{E}[Z_3] &= \mathbb{E} [\frac{1}{3-1} \cdot \sum_{i=1}^{3-1}Z_3^{(i)}] = \frac{1}{2} \cdot \mathbb{E}[Z_3^{(1)}] + \frac{1}{2} \cdot \mathbb{E}[Z_3^{(2)}] \\
@@ -262,7 +262,7 @@ By direct application of definitions: \\
 		&= \frac{1}{n} \cdot  (\sum_{i=1}^{n}  \mathbb{E}[Z_n^{(1)} | root = i])) \\
 		&= \frac{1}{n} \cdot  ( \mathbb{E}[Z_n^{(1)} | root = 1] +  \mathbb{E}[Z_n^{(1)} | root = 2] + \sum_{i=3}^{n}  \mathbb{E}[Z_n^{(1)} | root = i])) 
 	\end{align}
-	If $1$ is the root, we know that $2$ is in the right subtree of the root. Furthermore we can observe that the distance between $1$ and $2$ corresponds to the depth of $2$ in the right subtree incremented by one. If $2$ is the root, we know that $1$ is in its left subtree. Furthermore we know that $S={1,n}$, which implies that $S \cap (1,2) = \emptyset$. Hence $1$ is the only node in the left subtree of $2$. Therefore there distance is equal to $1$. In all other cases, $1$ and $2$ are in the left subtree of the root and there distance is equal to their distance in the left subtree of the root as the root cannot be on the path between $1$ and $2$ as it is larger than both. \\
+	If $1$ is the root, we know that $2$ is in the right subtree of the root. Furthermore we can observe that the distance between $1$ and $2$ corresponds to the depth of $2$ in the right subtree incremented by one. Note that $2$ has the rank $1$ in the right subtree because $1$ sits in the root. If $2$ is the root, we know that $1$ is in its left subtree. Furthermore we know that $S={1,n}$, which implies that $S \cap (1,2) = \emptyset$. Hence $1$ is the only node in the left subtree of $2$. Therefore there distance is equal to $1$. In all other cases, $1$ and $2$ are in the left subtree of the root and there distance is equal to their distance in the left subtree of the root as the root cannot be on the path between $1$ and $2$ as it is larger than both. \\
 Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0]. 
 	\begin{align}
 		\mathbb{E}[Z_n^{(1)}] &=  \frac{1}{n} \cdot  (D_{n-1}^{(1)} + 1 + 1 +  \sum_{i=3}^{n}  \mathbb{E}[Z_{i-1}^{(1)}]   ) \\
@@ -275,7 +275,7 @@ Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0].
 		&= \sum_{i=4}^{n} \frac{1}{i(i-1)} + \mathbb{E}[Z_{3}^{(1)}] \\
 		&=  \sum_{i=4}^{n} \frac{i - (i-1)}{i(i-1)} + \mathbb{E}[Z_{3}^{(1)}] \\
 		&=  \sum_{i=4}^{n}( \frac{1}{i-1} - \frac{1}{i}) + \mathbb{E}[Z_{3}^{(1)}] \\
-		&= \sum_{i=4}^{n} \frac{1)}{i-1} - \sum_{i=4}^{n} \frac{1}{i} + \mathbb{E}[Z_{3}^{(1)}] \\
+		&= \sum_{i=4}^{n} \frac{1}{i-1} - \sum_{i=4}^{n} \frac{1}{i} + \mathbb{E}[Z_{3}^{(1)}] \\
 		&= \sum_{i=3}^{n-1} \frac{1}{i} - \sum_{i=4}^{n} \frac{1}{i} + \mathbb{E}[Z_{3}^{(1)}] \\
 		&= \frac{1}{3}-\frac{1}{n} + \mathbb{E}[Z_{3}^{(1)}] \\
 		&= \frac{1}{3}-\frac{1}{n} + \frac{7}{6} \\
@@ -339,7 +339,7 @@ Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0].
 	\[ \forall x,y \in \mathbb{R} \ s.t.\  0 \leq x < y: \frac{x}{y} \leq ln(y) - ln(y-x)\]
 	As we know that $x < y$, we can formulate the following
 	\[ \exists \  \delta \in \mathbb{R} \ s.t. \ \delta>0 \ and \  x=y-\delta \]
-	We know that INSERT NAME HERE \(\forall x \in \mathbb{R}: 1+x \leq e^x \). With $z = ln(\frac{\delta}{y})$ we get the following:
+	We know that \(\forall x \in \mathbb{R}: 1+z \leq e^z \). With $z = ln(\frac{\delta}{y})$ we get the following:
 	\begin{align}
 		& 1 + ln(\frac{\delta}{y}) \leq e^{ln(\frac{\delta}{y})} \\
 		& \Leftrightarrow 1 - ln(\frac{y}{\delta}) \leq \frac{\delta}{y} \\
@@ -364,7 +364,7 @@ Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0].
 		& \leq ln(\sum_{l=1}^{i}p(l)) - ln(p(i)) + ln(\sum_{l=i+1}^{n} p(l)) - ln(p(i)) \\
 		& \leq ln (\frac{(\sum_{l=1}^{i}p(l))}{p(i)} \cdot \frac{\sum_{l=i+1}^{n} p(l)}{p(i)}) \\
 	\end{align}
-	The definition of the weighted binary tree tells us that $\sum_{l=1}^{n}p(l) =1$ as well as $\forall i, p(i)>0$. It follows immediately that 
+	The definition of the weighted binary tree tells us that $\sum_{l=1}^{n}p(l) =1$ as well as $\forall i \in [n], p(i)>0$. It follows immediately that 
 	\( \sum_{l=1}^{i}p(l) \leq \sum_{l=1}^{n}p(l) = 1\) and analogously 
 	\( \sum_{l=i+1}^{n}p(l) \leq \sum_{l=1}^{n}p(l) = 1 \).
 	Hence we can conclude:
@@ -520,3 +520,729 @@ In order to apply our previous knowledge, we apply the dual transformation of po
 %----------------------------------------------------------------------------------------
 \end{document}
 PreferencesEnglish
+="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_098.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_099.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_096.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_095.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_094.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_093.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_091.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_089.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_090.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_087.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_086.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_084.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_085.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_082.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_083.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_081.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_079.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_080.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_078.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_077.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_076.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_075.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_073.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_074.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_071.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_072.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_070.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_069.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_068.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_066.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_067.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_065.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_064.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_063.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_062.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_061.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_059.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_060.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_058.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_057.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_056.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_055.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_054.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_053.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_052.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_050.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_051.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_049.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_048.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_047.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_046.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_045.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_044.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_042.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_043.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_041.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_040.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_039.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_038.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_037.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_036.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_034.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_035.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_033.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_032.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_031.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_030.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_029.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_028.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_027.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_025.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_026.jpg" added="2016-10-21T15:43:39Z" modified="2016-10-21T15:43:39Z" visited="2016-10-21T15:43:42Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/jpeg"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-10-21T15:43:39Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kevin/Downloads/Photos/ec_kickoff_fall15_024.jpg" added="2016-101	
