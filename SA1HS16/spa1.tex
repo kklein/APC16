@@ -293,7 +293,7 @@ Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0].
 	\begin{align}
 		Z_n^{(k)} &=  \sum_{i=1}^{n}| A_i^{(k)} -  A_i^{(k+1)}| \\
 		\mathbb{E} [Z_n^{(k)}] &=  \sum_{i=1}^{n}| \mathbb{E}[A_i^{(k)}] -  \mathbb{E}[A_i^{(k+1)}]| \\
-		&=  \sum_{i=1}^{n}| \frac{1}{|i-k|+1} - \frac{1}{|i-k-1|+1} \text{ (as we have proven in [1])} \\
+		&=  \sum_{i=1}^{n}| \frac{1}{|i-k|+1} - \frac{1}{|i-k-1|+1}| \text{ (as we have proven in [1])} \\
 		&= \sum_{i=1}^{k} (\frac{1}{k-i+1} - \frac{1}{k+1-i+1}) + \sum_{i=k+1}^{n} (\frac{1}{i-k+1} - \frac{1}{i-k-1+1}) \\
 		&= \sum_{i=1}^{k} (\frac{1}{k-i+1} - \frac{1}{k-i+2})  + \sum_{i=k+1}^{n} (\frac{1}{i-k+1} - \frac{1}{i-k}) \\
 		&=  \sum_{i=0}^{k-1} \frac{1}{k-i} -  \sum_{i=-1}^{k-2} \frac{1}{k-i} + \sum_{i=1}^{n-k} \frac{1}{i} - \sum_{i=2}^{n-k+1} \frac{1}{i} \\
@@ -302,10 +302,10 @@ Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0].
 	\end{align}
 We plug this into the expected value of $Z_n$.
 	\begin{align}
-		\mathbb{E}[Z_n] &=\frac{1}{n-1} \sum{k=1}{n-1}\mathbb{E} [Z_n^{(k)}] \\
-		&= \frac{1}{n-1} \sum{k=1}{n-1} ( 2  - \frac{1}{k+1} - \frac{1}{n-k+1}) \\
-		&= \frac{1}{n-1} (2 -  \sum{k=1}{n-1} \frac{1}{k+1} -  \sum{k=1}{n-1}\frac{1}{n-k+1}) \\
-		&= \frac{1}{n-1} (2 - \sum{k=2}{n} \frac{1}{k}  -  \sum{k=2}{n}\frac{1}{k}) \\
+		\mathbb{E}[Z_n] &=\frac{1}{n-1} \sum_{k=1}^{n-1}\mathbb{E} [Z_n^{(k)}] \\
+		&= \frac{1}{n-1} \sum_{k=1}^{n-1} ( 2  - \frac{1}{k+1} - \frac{1}{n-k+1}) \\
+		&= \frac{1}{n-1} (2 -  \sum_{k=1}^{n-1} \frac{1}{k+1} -  \sum_{k=1}^{n-1}\frac{1}{n-k+1}) \\
+		&= \frac{1}{n-1} (2 - \sum_{k=2}^{n} \frac{1}{k}  -  \sum_{k=2}^{n}\frac{1}{k}) \\
 		&= \frac{1}{n-1} (2 - H_n+1 - H_n +1)\\
 		&= \frac{2}{n-1} (2 - H_n)  \\
 	\end{align}
@@ -319,10 +319,10 @@ We are looking for the probability with which at least one of the three trees ha
 		\mathbb{E}[number\ of\ trees\ with [Z_n] > 3] &\geq 1 \Leftrightarrow 3(1-p) \geq 1 \\
 		& \Leftrightarrow p \leq \frac{2}{3} \\
  	\end{align}
-	In order to show that this holds, let's induce a contradiction by assuming $p > \frac{2}{3}$. \\
+	In order to show that this holds, let's imply a contradiction by assuming $p > \frac{2}{3}$. \\
 	Recall that the expected value of $Z_n$ can be calculated by 
 	\begin{align}
-		% \mathbb{E}[Z_n] &= \sum_{t\ tree\ of\ size\ n\} (Z_n\ of\ t) \cdot \Pr[t] \\
+		\mathbb{E}[Z_n] &= \sum_{t\ tree\ of\ size\ n} (Z_n\ of\ t) \cdot \Pr[t] \\
 		&=  \sum_{t\ tree\ of\ size\ n\ with\ Z_n >3} (Z_n\ of\ t) \cdot \Pr[t] +  \sum_{t\ tree\ of\ size\ n\ with\ Z_n \leq 3} (Z_n\ of\ t) \cdot \Pr[t] \\ 
 		& \geq  \sum_{t\ tree\ of\ size\ n\ with\ Z_n >3} 3 \cdot \Pr[t] +  \sum_{t\ tree\ of\ size\ n\ with\ Z_n \leq 3} (Z_n\ of\ t) \cdot \Pr[t] \\ 
 		& \geq  3 \cdot  \sum_{t\ tree\ of\ size\ n\ with\ Z_n >3}  \Pr[t] +  \sum_{t\ tree\ of\ size\ n\ with\ Z_n \leq 3} (Z_n\ of\ t) \cdot \Pr[t] \\
@@ -331,7 +331,7 @@ We are looking for the probability with which at least one of the three trees ha
 		& >  3 \cdot \frac{2}{3} \\
 		& > 2
 	\end{align}
-	This contradicts the knowledge we have about  \mathbb{E}[Z_n], namely that it is $\leq 2$. It follows that $p > \frac{2}{3}$, which is equivalent to saying that we have at least one tree among those tree which has $Z_n < 3$.
+	This contradicts the knowledge we have about $ \mathbb{E}[Z_n]$, namely that it is $\leq 2$. It follows that $p > \frac{2}{3}$, which is equivalent to saying that we have at least one tree among those tree which has $Z_n < 3$.
 \end{enumerate}
 
 [0] APC script 2015 Edition, Chapter 1.4 Expected Depth of Individual Keys, Theorom 1.6, p.18 
