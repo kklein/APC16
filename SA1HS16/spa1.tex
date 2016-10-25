@@ -309,7 +309,7 @@ We plug this into the expected value of $Z_n$.
 		&= \frac{1}{n-1} (2 - H_n+1 - H_n +1)\\
 		&= \frac{2}{n-1} (2 - H_n)  \\
 	\end{align}
-\item % 2 d
+\item % 1 d
 We are looking for the probability with which at least one of the three trees has $[Z_n] > 3$. Let's denote $\Pr[tree\ of\ size\ n\ has\ [Z_n] > 3]$ as $p$.
 	\begin{align}
 		\mathbb{E}[number\ of\ trees\ with [Z_n] > 3] &= 0 \cdot p^3 + 1 {3\choose 1}(p)^2(1-p) + 2{3\choose 2}(p)(1-p)^2 + 3 (1-p)^3 \\
@@ -322,9 +322,16 @@ We are looking for the probability with which at least one of the three trees ha
 	In order to show that this holds, let's induce a contradiction by assuming $p > \frac{2}{3}$. \\
 	Recall that the expected value of $Z_n$ can be calculated by 
 	\begin{align}
-		\mathbb{E}[Z_n] = \sum_{t is a tree of size n} (Z_n\ of\ t) \cdot \Pr[t] \\
+		% \mathbb{E}[Z_n] &= \sum_{t\ tree\ of\ size\ n\} (Z_n\ of\ t) \cdot \Pr[t] \\
+		&=  \sum_{t\ tree\ of\ size\ n\ with\ Z_n >3} (Z_n\ of\ t) \cdot \Pr[t] +  \sum_{t\ tree\ of\ size\ n\ with\ Z_n \leq 3} (Z_n\ of\ t) \cdot \Pr[t] \\ 
+		& \geq  \sum_{t\ tree\ of\ size\ n\ with\ Z_n >3} 3 \cdot \Pr[t] +  \sum_{t\ tree\ of\ size\ n\ with\ Z_n \leq 3} (Z_n\ of\ t) \cdot \Pr[t] \\ 
+		& \geq  3 \cdot  \sum_{t\ tree\ of\ size\ n\ with\ Z_n >3}  \Pr[t] +  \sum_{t\ tree\ of\ size\ n\ with\ Z_n \leq 3} (Z_n\ of\ t) \cdot \Pr[t] \\
+		& \geq  3 \cdot p  +  \sum_{t\ tree\ of\ size\ n\ with\ Z_n \leq 3} (Z_n\ of\ t) \cdot \Pr[t] \\
+		& \geq  3 \cdot p \\
+		& >  3 \cdot \frac{2}{3} \\
+		& > 2
 	\end{align}
-	 
+	This contradicts the knowledge we have about  \mathbb{E}[Z_n], namely that it is $\leq 2$. It follows that $p > \frac{2}{3}$, which is equivalent to saying that we have at least one tree among those tree which has $Z_n < 3$.
 \end{enumerate}
 
 [0] APC script 2015 Edition, Chapter 1.4 Expected Depth of Individual Keys, Theorom 1.6, p.18 
