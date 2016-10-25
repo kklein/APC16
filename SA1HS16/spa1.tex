@@ -283,11 +283,37 @@ Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0].
 	\end{align}
 	We see that $\frac{3}{2} - \frac{1}{2} = 1$ and  $\frac{3}{2} - \frac{1}{3} = \frac{7}{6}$, therefore we can conclude that
 	\[ \forall n \geq 2: \mathbb{E}[Z_n^{(1)}] = \frac{3}{2} - \frac{1}{n}\]
-\item % 2 c
+\item % 1 c
+	\begin{align}
+		Z_n^{(k)} &= |D_n^{(k)} - D_n^{(k+1)}| \text{ (definition of $Z_n^{k}$) } \\
+		&= |\sum_{i=1}^{n} A_i^{(k)} - \sum_{i=1}^{n} A_i^{(k+1)}| \text{ (definition of $D_n^{(k)}$)} \\
+		&= |\sum_{i=1}^{n}( A_i^{(k)} -  A_i^{(k+1)})| \\
+	\end{align}
+	As we know that $k$ and $k+1$ are ancestors of each other, the terms of the sum are either all $\leq 0$ or $\geq0$. Thererfore we can simplify:
+	\begin{align}
+		Z_n^{(k)} &=  \sum_{i=1}^{n}| A_i^{(k)} -  A_i^{(k+1)}| \\
+		\mathbb{E} [Z_n^{(k)}] &=  \sum_{i=1}^{n}| \mathbb{E}[A_i^{(k)}] -  \mathbb{E}[A_i^{(k+1)}]| \\
+		&=  \sum_{i=1}^{n}| \frac{1}{|i-k|+1} - \frac{1}{|i-k-1|+1} \text{ (as we have proven in [1])} \\
+		&= \sum_{i=1}^{k} (\frac{1}{k-i+1} - \frac{1}{k+1-i+1}) + \sum_{i=k+1}^{n} (\frac{1}{i-k+1} - \frac{1}{i-k-1+1}) \\
+		&= \sum_{i=1}^{k} (\frac{1}{k-i+1} - \frac{1}{k-i+2})  + \sum_{i=k+1}^{n} (\frac{1}{i-k+1} - \frac{1}{i-k}) \\
+		&=  \sum_{i=0}^{k-1} \frac{1}{k-i} -  \sum_{i=-1}^{k-2} \frac{1}{k-i} + \sum_{i=1}^{n-k} \frac{1}{i} - \sum_{i=2}^{n-k+1} \frac{1}{i} \\
+		&= 1 - \frac{1}{k+1} + 1 - \frac{1}{n-k+1} \\
+		&= 2  - \frac{1}{k+1} - \frac{1}{n-k+1}
+	\end{align}
+We plug this into the expected value of $Z_n$.
+	\begin{align}
+		\mathbb{E}[Z_n] &=\frac{1}{n-1} \sum{k=1}{n-1}\mathbb{E} [Z_n^{(k)}] \\
+		&= \frac{1}{n-1} \sum{k=1}{n-1} ( 2  - \frac{1}{k+1} - \frac{1}{n-k+1}) \\
+		&= \frac{1}{n-1} (2 -  \sum{k=1}{n-1} \frac{1}{k+1} -  \sum{k=1}{n-1}\frac{1}{n-k+1}) \\
+		&= \frac{1}{n-1} (2 - \sum{k=2}{n} \frac{1}{k}  -  \sum{k=2}{n}\frac{1}{k}) \\
+		&= \frac{1}{n-1} (2 - H_n+1 - H_n +1)\\
+		&= \frac{2}{n-1} (2 - H_n)  \\
+	\end{align}
 \item % 2 d
 \end{enumerate}
 
-[0] APC script 2015 Edition, Chapter 1.4 Expected Depth of Individual Keys, p.18 
+[0] APC script 2015 Edition, Chapter 1.4 Expected Depth of Individual Keys, Theorom 1.6, p.18 
+[1] APC script 2015 Edition, Chapter 1.4 Expected Depth of Individual Keys, Lemma 1.5, p.18 
 \end{homeworkProblem}
 %----------------------------------------------------------------------------------------
 %	PROBLEM 2
@@ -492,9 +518,8 @@ In order to apply our previous knowledge, we apply the dual transformation of po
 				\item While $left$ is not equal to $right$:
 					\begin{enumerate}[-]
 						\item Query, as in c), a random pair of lines intersecting between $left$ and $right$. Determine their intersection point by solving the linear equation and call the $x$-value of that point $x_I$. 
-						\item Query the number of intersections in $-\infty$ and up to $x_I$, , by calling the algorithm from b) two separate times. 
-						\item If $result_{x_I} - result_{-\infty} > \frac{m}{2}$ we set $right$ to $x_I$. Else we set $left$ to $x_I - \delta$, with $\delta$ the smallest positive, non-zero number.
-						\item we check whether we have found the median yet. We do so by computing the number of investions in $right$ by subtracting the result of algoirthm b) with $right - \delta$ from the result with $right$. We also subtract the query $+\infty $
+						\item Query the number of intersections in $-\infty$, up to $X_I - \delta$ and up to $x_I$, , by calling the algorithm from b) three separate times with $\delta$ the smallest positive, non-zero number.
+						\item If $result_{x_I} - result_{-\infty} > \frac{m}{2}$ and $result_{x_I-\delta} - result_{-\infty}$ , we know that we have the median intersection in $x_I$ and hence break the while loop. In order to store the result, we set $right=left=x_I$. Else if  $result_{x_I} - result_{-\infty} > \frac{m}{2}$ we set $right$ to $x_I $. Else we set $left$ to $x_I -\delta$.
 					\end{enumerate}
 				\item When we have $left$ equal to $right$, we know the $x$ of the median intersection point. To get one particular intersection point, we query the algorithm from c) once again with $right$ and $right - \delta$. This will give us any two lines with an intersection point that is exactly on $right$.
 			\end{enumerate}
