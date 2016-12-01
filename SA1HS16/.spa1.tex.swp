@@ -1,0 +1,522 @@
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage[german]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{enumerate} % used for enumerate args
+\usepackage{multicol} % columns
+
+\usepackage{pgf} 
+\usepackage{tikz}
+%\usepackage{forest} % treees :D
+%\usetikzlibrary{arrows,automata} %for FSM
+
+% Custom commands
+\DeclareMathOperator{\Kl}{Kl} %Klassen von ZustÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¤nden
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+% Shamelessly copied from http://tex.stackexchange.com/questions/43008/absolute-value-symbols
+\DeclarePairedDelimiter\abs{\lvert}{\rvert} % nice |x|
+\DeclarePairedDelimiter\norm{\lVert}{\rVert} % nice ||x||
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+%\chead{\hmwkClass\ (\hmwkClassInstructor\): \hmwkTitle} % Top center head
+%\rhead{\firstxmark} % Top right header
+\rhead{}
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+%\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+%\lstloadlanguages{Pascal} % Load Pascal syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/%contrib/listings/listings.pdf
+%\lstset{language=Perl, % Use Pascal in this example
+%        frame=single, % Single frame around code
+%        basicstyle=\small\ttfamily, % Use small true type font
+%        keywordstyle=[1]\color{Blue}\bf, % Pascal functions bold and blue
+%        keywordstyle=[2]\color{Purple}, % Pascal function arguments purple
+%        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+%        identifierstyle=, % Nothing special about identifiers                                         
+%        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+%        stringstyle=\color{Purple}, % Strings are purple
+%        showstringspaces=false, % Don't put marks in string spaces
+%        tabsize=5, % 5 spaces per tab
+%        %
+%        % Put standard Pascal functions not included in the default language here
+%        morekeywords={rand},
+%        %
+%        % Put Pascal function parameters here
+%        morekeywords=[2]{on, off, interp},
+%        %
+%        % Put user defined functions here
+%        morekeywords=[3]{test},
+%        %
+%        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+%        numbers=left, % Line numbers on left
+%        firstnumber=1, % Line numbers start with line 1
+%        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+%        stepnumber=5 % Line numbers go in steps of 5
+%}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .p), the second parameter is the caption
+\newcommand{\pascalscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.p}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+%\newcommand{\enterProblemHeader}[1]{
+%\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%}
+
+% Header and footer for when a page split occurs between problem environments
+%\newcommand{\exitProblemHeader}[1]{
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1}{}\nobreak
+%}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Exercise \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+%\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+%\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+%\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+%\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Special Assignment 1} % Assignment title
+\newcommand{\hmwkDueDate}{25\ October\ 2015} % Due date
+\newcommand{\hmwkClass}{Algorithms, Probability and Computing} % Course/class
+\newcommand{\hmwkClassInstructor}{}  % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Kevin Klein} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor}
+\vspace{3in}
+}}
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\addtocounter{homeworkProblemCounter}{0}
+\newpage
+%\tableofcontents
+%\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+For this exercise, we assume that the relevant random binary search tree holds the set of elements $S$ of size $n$. Without loss of generality, we will assume that $S = \{1, n\}$ and in particular $i \in S \Rightarrow rank(i) = i$.
+Let us the following recursive notation to express the structure of a binary search tree: $ (node)(leftSubtree)(rightSubtree)$.
+\begin{enumerate}[a)]
+\item % 1 a
+
+By direct application of definitions: \\
+\( \mathbb{E}[Z_2^{(1)}] = \frac{1}{2} \cdot \mathbb{E}[Z_2^{(1)} | root = 1] + \frac{1}{2} \cdot \mathbb{E}[Z_2^{(1)} | root = 2] = \frac{1}{2} + \frac{1}{2} = 1 \\\)
+\( \mathbb{E}[Z_2] = \mathbb{E} [\frac{1}{2-1} \cdot \sum_{i=1}^{2-1}(Z_2^{(i)})] = \mathbb{E}[Z_2^{1}] = 1\) \\
+
+\begin{align}
+\mathbb{E}[Z_3^{(1)}] 
+ & = \frac{1}{6} \cdot \mathbb{E}[Z_3^{(1)} | (1)(2)(3)] + \frac{1}{6} \cdot \mathbb{E}[Z_3^{(1)} | (1)(3)(2)] + \frac{1}{3} \cdot \mathbb{E}[Z_3^{(1)} | (2)(1)(3) ]  \\
+ & + \frac{1}{6} \cdot \mathbb{E}[Z_3^{(1)} | (3)(1)(2)] + \frac{1}{6} \cdot \mathbb{E}[Z_3^{(1)} | (3)(2)(1)] \\
+ & = \frac{1}{6} \cdot (1 + 2 + 2 + 1 + 1)  = \frac{7}{6}
+\end{align}
+\begin{align}
+\mathbb{E}[Z_3] &= \mathbb{E} [\frac{1}{3-1} \cdot \sum_{i=1}^{3-1}Z_3^{(i)}] = \frac{1}{2} \cdot \mathbb{E}[Z_3^{(1)}] + \frac{1}{2} \cdot \mathbb{E}[Z_3^{(2)}] \\
+				&= \frac{1}{2} \cdot (\frac{7}{6} + \frac{1}{6} \cdot \mathbb{E}[Z_3^{(2)} | (1)(2)(3)] + \frac{1}{6} \cdot \mathbb{E}[Z_3^{(2)} | (1)(3)(2)] + \frac{1}{3} \cdot \mathbb{E}[Z_3^{(2)} | (2)(1)(3) ] \\
+				&+ \frac{1}{6} \cdot \mathbb{E}[Z_3^{(2)} | (3)(1)(2)] + \frac{1}{6} \cdot \mathbb{E}[Z_3^{(1)} | (3)(2)(1)]) \\
+				&= \frac{1}{2} \cdot (\frac{7}{6} + \frac{7}{6}) \\
+				&= \frac{7}{6}
+\end{align}
+
+\item %1 b
+	We learnt from a) that $\mathbb{E}[Z_2^{(1)}] = 1$ and $\mathbb{E}[Z_3^{(1)}] = \frac{7}{6}$. \\
+	For $n \geq 4$:
+	\begin{align}
+		\mathbb{E}[Z_n^{(1)}] &= \sum_{i=1}^{n} (\Pr(root = i) \cdot \mathbb{E}[Z_n^{(1)} | root = i]) \\
+		&= \frac{1}{n} \cdot  (\sum_{i=1}^{n}  \mathbb{E}[Z_n^{(1)} | root = i])) \\
+		&= \frac{1}{n} \cdot  ( \mathbb{E}[Z_n^{(1)} | root = 1] +  \mathbb{E}[Z_n^{(1)} | root = 2] + \sum_{i=3}^{n}  \mathbb{E}[Z_n^{(1)} | root = i])) 
+	\end{align}
+	If $1$ is the root, we know that $2$ is in the right subtree of the root. Furthermore we can observe that the distance between $1$ and $2$ corresponds to the depth of $2$ in the right subtree incremented by one. Note that $2$ has the rank $1$ in the right subtree because $1$ sits in the root. If $2$ is the root, we know that $1$ is in its left subtree. Furthermore we know that $S={1,n}$, which implies that $S \cap (1,2) = \emptyset$. Hence $1$ is the only node in the left subtree of $2$. Therefore there distance is equal to $1$. In all other cases, $1$ and $2$ are in the left subtree of the root and there distance is equal to their distance in the left subtree of the root as the root cannot be on the path between $1$ and $2$ as it is larger than both. \\
+Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0]. 
+	\begin{align}
+		\mathbb{E}[Z_n^{(1)}] &=  \frac{1}{n} \cdot  (D_{n-1}^{(1)} + 1 + 1 +  \sum_{i=3}^{n}  \mathbb{E}[Z_{i-1}^{(1)}]   ) \\
+		&=  \frac{1}{n} \cdot  ( H_1 + H_{n-1-1+1} +  \sum_{i=3}^{n}  \mathbb{E}[Z_{i-1}^{(1)}]   ) \\
+		&=  \frac{1}{n} \cdot  ( H_1 + H_{n-1} +  \sum_{i=3}^{n}  \mathbb{E}[Z_{i-1}^{(1)}]   ) \\
+		n \cdot \mathbb{E}[Z_n^{(1)}] - (n-1) \cdot \mathbb{E}[Z_{n-1}^{(1)}] &= H_{n-1} - H_{n-2} +  \mathbb{E}[Z_{n-1}^{(1)}]  \\
+		\Leftrightarrow n \cdot \mathbb{E}[Z_n^{(1)}] &= n \cdot  \mathbb{E}[Z_{n-1}^{(1)}] + \frac{1}{n-1} \\
+		\Leftrightarrow \mathbb{E}[Z_n^{(1)}] &=  \mathbb{E}[Z_{n-1}^{(1)}] + \frac{1}{n(n-1)} \\
+		&= \frac{1}{n(n-1)} + \frac{1}{(n-1)(n-2)} + ... + \frac{1}{4 \cdot 3} +  \mathbb{E}[Z_{3}^{(1)}] \\
+		&= \sum_{i=4}^{n} \frac{1}{i(i-1)} + \mathbb{E}[Z_{3}^{(1)}] \\
+		&=  \sum_{i=4}^{n} \frac{i - (i-1)}{i(i-1)} + \mathbb{E}[Z_{3}^{(1)}] \\
+		&=  \sum_{i=4}^{n}( \frac{1}{i-1} - \frac{1}{i}) + \mathbb{E}[Z_{3}^{(1)}] \\
+		&= \sum_{i=4}^{n} \frac{1}{i-1} - \sum_{i=4}^{n} \frac{1}{i} + \mathbb{E}[Z_{3}^{(1)}] \\
+		&= \sum_{i=3}^{n-1} \frac{1}{i} - \sum_{i=4}^{n} \frac{1}{i} + \mathbb{E}[Z_{3}^{(1)}] \\
+		&= \frac{1}{3}-\frac{1}{n} + \mathbb{E}[Z_{3}^{(1)}] \\
+		&= \frac{1}{3}-\frac{1}{n} + \frac{7}{6} \\
+		&= \frac{3}{2} - \frac{1}{n}
+	\end{align}
+	We see that $\frac{3}{2} - \frac{1}{2} = 1$ and  $\frac{3}{2} - \frac{1}{3} = \frac{7}{6}$, therefore we can conclude that
+	\[ \forall n \geq 2: \mathbb{E}[Z_n^{(1)}] = \frac{3}{2} - \frac{1}{n}\]
+\item % 2 c
+\item % 2 d
+\end{enumerate}
+
+[0] APC script 2015 Edition, Chapter 1.4 Expected Depth of Individual Keys, p.18 
+\end{homeworkProblem}
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+
+\begin{enumerate}[a)]
+\item % 2 a)
+	Analogously to the proof of Lemma 1.5 [0], we will proceed with an exhaustive case distinction in order to prove that
+	\[ \mathbb{E}[A_i^j] = \frac{p(j)}{\sum_{l=min \{i,j\}}^{max\{i,j\}}p(l)}\]
+	\begin{enumerate}[(i)]
+
+	\item $i = j$
+		\begin{align}
+			\mathbb{E}[A_i^{(j)}] &= {E}[A_j^{(j)}] \\
+			&= 1 \text{ (definition of ancestor indicator variable)} \\
+			&= \frac{p(j)}{p(j)} \text{ ($p(j) > 0$  is given)} \\
+			&= \frac{p(j)}{\sum_{l=min\{i,j\}}^{max\{i,j\}} p(l)} \text{ (as $i=j$)} \\
+		\end{align}
+
+	\item $i = 1$ and $j = n$ \\
+		Note that $i$ and $j$ will always end up in different subtrees of the root, except for the cases in which either of both is the root. Hence, if none of them is the root, the indicator variable is equal to 0. If $i$ is the root, $j$ is a child of $i$ and $j$ is different from $i$ because $n \geq 2$. Therefore $j$ cannot be an ancestor of $i$ if $i$ is the root. Consequently, the only case is which $j$ is an ancestor of $i$ is when $j$ is the root of the tree. 
+		\begin{align}
+			\mathbb{E}[A_i^{(j)}] &= \Pr(root=j) \\
+			&= \frac{p(j)}{\sum_{l=1}^{n} p(l)} \text{ (definition of the weighted binary tree)} \\
+			&= \frac{p(j)}{\sum_{l=min\{i,j\}}^{max\{i,j\}} p(l)}  \text{ (as $i=1$ and $j=n$)} \\
+		\end{align}
+
+	\item $j=1$ and $i=n$ \\
+		This case is symmetric to case (ii).	
+
+	\item $i \neq j$ and $n > j-i+1$ and $root \in \{min\{i,j\},max\{i,j\}\}$ \\
+		If $i$ is the root, $j$ cannot be an ancestor of as we know that $i \neq j$. If $root \in \{min\{i,j\}+1,max\{i,j\}-1\}$, we know that i and j will always end up in different subtrees of the root. Hence, if none of them is the root, the indicator variable is equal to 0.  Consequently, the only case is which $j$ is an ancestor of $i$ is when $j$ is the root of the tree. 
+		\begin{align}
+			\mathbb{E}[A_i^{(j)}] &= \Pr(root=j| root  \in \{min\{i,j\},max\{i,j\}\} ) \\
+			&= \frac{\Pr(root=j)}{\Pr(root  \in \{min\{i,j\},max\{i,j\}\} )}  \text{ (definition of conditional probability)} \\
+			&= \frac{\frac{p(j)}{\sum_{l=1}^{n} p(l)}}{ \frac{\sum_{l=min\{i,j\}}^{max\{i,j\}}p(l)}{\sum_{l=1}^{n} p(l)}}   \text{ (definition of the weighted binary tree)} \\
+			&= \frac{p(j)}{\sum_{l=min\{i,j\}}^{max\{i,j\}}p(l)}
+		\end{align}
+
+	\item $n > j-i+1$ and $root \notin \{min\{i,j\},max\{i,j\}\} $ \\
+		As the root must either be smaller than $i$ and smaller than $j$ or larger than $i$ and larger than $j$, we know that $i$ and $j$ will always end up in the same subtree of the root. Note that within the left subtree the ranks of the keys will remain the same. Within the right subtree, the ranks are all decreased by $k$ where $k=root$. Hence the difference of ranks between $i$ and $j$ remains the same in both subtrees. \\
+		Therefore, we can now look at the respective subtree containing $i$ and $j$ in an isolated fashion, as we know that the current root does not contribute anything to the notion we look at. In the base case in which $n=2$, we can either apply (i) if $i$ and $j$ are equal and (ii) if they're not. For $n>2$, we can inductively apply cases (i), (ii), (iii), (iv) and (v).
+	\end{enumerate}
+
+\item % 2 b) 
+	We want to prove that \\
+	\[ \forall x,y \in \mathbb{R} \ s.t.\  0 \leq x < y: \frac{x}{y} \leq ln(y) - ln(y-x)\]
+	As we know that $x < y$, we can formulate the following
+	\[ \exists \  \delta \in \mathbb{R} \ s.t. \ \delta>0 \ and \  x=y-\delta \]
+	We know that \(\forall x \in \mathbb{R}: 1+z \leq e^z \). With $z = ln(\frac{\delta}{y})$ we get the following:
+	\begin{align}
+		& 1 + ln(\frac{\delta}{y}) \leq e^{ln(\frac{\delta}{y})} \\
+		& \Leftrightarrow 1 - ln(\frac{y}{\delta}) \leq \frac{\delta}{y} \\
+		& \Leftrightarrow 1 - \frac{\delta}{y} \leq ln(\frac{y}{\delta}) \\
+		& \Leftrightarrow \frac{y-\delta}{y} \leq ln(\frac{y}{y-y+\delta}) \\
+		& \Leftrightarrow \frac{x}{y} \leq ln(\frac{y}{y - x - \delta + \delta}) \\
+		& \Leftrightarrow \frac{x}{y} \leq ln(\frac{y}{y - x}) \\
+		& \Leftrightarrow \frac{x}{y} \leq ln(y) - ln(y - x) \\
+	\end{align}
+
+\item % 2 c)
+	We want to prove that 
+	\[ \forall i \in [n]: \mathbb{E} [D_n^{(i)}] \leq 2 \cdot ln(\frac{1}{p(i)}) \]
+	\begin{align}
+		 \mathbb{E} [D_n^{(i)}] &= \sum_{j=1}^{n}\mathbb{E}[A_i^j] \text{ (definition of Depth $D_n^{(i)}$) } \\
+		&= \sum_{j=1, j \neq i}^{n}  \frac{p(j)}{\sum_{l=min\{i,j\}}^{max\{i,j\}} p(l)} \text{ (application of a)) } \\
+		& \leq \sum_{j=1, j \neq i}^{n} ln(\sum_{l=min\{i,j\}}^{max\{i,j\}} p(l)) - ln ( \sum_{l=min\{i,j\}}^{max\{i,j\}} p(l) - p(j)) \text{ (application of b)) } \\
+		& \leq  (\sum_{j=1, j \neq i}^{n}  ln(\sum_{l=min\{i,j\}}^{max\{i,j\}} p(l))) - ((\sum_{j=1, j \neq i}^{n}  ln ( \sum_{l=min\{i,j\}}^{max\{i,j\}} p(l) - p(j)) ) \\
+		& \leq \sum_{j=1}^{i-1}  ln(\sum_{l=j}^{i} p(l))) +  \sum_{j=i+1}^{n}  ln(\sum_{l=i}^{j} p(l))) - \sum_{j=1}^{i-1} ln ( \sum_{l=j}^{i} p(l) - p(j)) ) - \sum_{j=i+1}^{n} ln ( \sum_{l=i}^{j} p(l) - p(j)) ) \\
+		& \leq \sum_{j=1}^{i-1}  ln(\sum_{l=j}^{i} p(l))) +  \sum_{j=i+1}^{n}  ln(\sum_{l=i}^{j} p(l))) - \sum_{j=1}^{i-1} ln ( \sum_{l=j+1}^{i} p(l)) ) - \sum_{j=i+1}^{n} ln ( \sum_{l=i}^{j-1} p(l)) ) \\
+		& \leq \sum_{j=1}^{i-1}  ln(\sum_{l=j}^{i} p(l))) +  \sum_{j=i+1}^{n}  ln(\sum_{l=i}^{j} p(l))) - \sum_{j=2}^{i} ln ( \sum_{l=j}^{i} p(l)) ) - \sum_{j=i}^{n-1} ln ( \sum_{l=i}^{j} p(l)) ) \\
+		& \leq ln(\sum_{l=1}^{i}p(l)) - ln(p(i)) + ln(\sum_{l=i+1}^{n} p(l)) - ln(p(i)) \\
+		& \leq ln (\frac{(\sum_{l=1}^{i}p(l))}{p(i)} \cdot \frac{\sum_{l=i+1}^{n} p(l)}{p(i)}) \\
+	\end{align}
+	The definition of the weighted binary tree tells us that $\sum_{l=1}^{n}p(l) =1$ as well as $\forall i \in [n], p(i)>0$. It follows immediately that 
+	\( \sum_{l=1}^{i}p(l) \leq \sum_{l=1}^{n}p(l) = 1\) and analogously 
+	\( \sum_{l=i+1}^{n}p(l) \leq \sum_{l=1}^{n}p(l) = 1 \).
+	Hence we can conclude:
+	\begin{align}
+		 \mathbb{E} [D_n^{(i)}] & \leq ln(\frac{1}{p(i)} \cdot \frac{1}{p(i)}) \\
+		& \leq 2 \cdot ln(\frac{1}{p(i)})
+	\end{align}
+	
+\end{enumerate}
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+\begin{enumerate}[a)]
+\item % 3 a
+	We determine the maximum number of inversions of  permutations, short $maxP(n)$  on a set of $n$ elements by induction.
+	\begin{enumerate}[-]
+		\item Claim: $\forall n \geq 2: maxP(n) = \frac{n(n-1)}{2}$
+		\item Base case: n = 2: \\
+			There is exactly 1 permutation if the second element is smaller than the first. \\
+			\[ \frac{n(n-1)}{2} = \frac{2 \cdot 1}{2} = 1\]
+		\item Induction step: $n \rightarrow n+1$ \\
+			The induction hypothesis tells us that we have $maxP(n) = \frac{n(n-1)}{2}$ for the set of n numbers. We cannot create more than $n$ inversions by adding the $n+1$th element as there are only $n+1$ elements and there cannot be more than one inversion per pair of elements. We can create exactly $n$ inversions by either positioning an element larger than the previous maximum in the first position or an element being smaller than the previous minimum in last position. Hence
+			\begin{align}
+				maxP(n+1) &= maxP(n) + n \\
+				&=  \frac{n(n-1)}{2} + n \text{ (induction hypothesis)} \\
+				&= \frac{n(n-1+2)}{2} \\
+				&= \frac{(n+1)n}{2} \\
+			\end{align} 
+	\end{enumerate}
+			
+\item % 3 b
+	We are given a set of $n$ non-vertical lines $L$ and $a \in \mathbb{R}$. We assume that the lines are stored in the fashion $l \in L: l = (x, y)$. Note that we consider each intersection of a pair of lines as an intersection. This implies that if $k$ lines intersect in a single point, we count this as $\frac{k(k-1)}{2}$ intersections. We are still not guaranteed to have $\frac{n(n-1)}{2}$ intersections in total, as parallel lines are allowed and a pair of parallel lines does not intersect. An additional relevant observation is that the lines are contained in a set. As a set does not contain duplicates we can conclude that $\forall l_i, l_j \in L, l_i \neq l_j: x_i \neq $ or $y_i \neq y_j$.
+	\begin{enumerate}[1.] 
+	
+		\item \textbf{Algorithm}
+			\begin{enumerate}[(1)]
+				\item We convert the set $L$ into a list $L$, such that from now on, there exists an order of the elements.
+				%\item We define a total order in the list $L$ by sorting the list s.t. \(l_i,l_{i+1} \in L \Leftrightarrow x_i < x_{i+1} \) or $(x_i = x_{i+1}$ and $y_i > y_{i+1})$. As we know that there are no duplicates, this is a total order relation. Intuitively, this order represents the relative order of the lines for $x=-\infty$ in a way that $l_i$ lies above $l_{i+1}$ in $x=-\infty$.
+				\item We define a total order in $L$ by defining the permutation $\pi_{-\infty}:L \rightarrow \{1..n\}$. This permutation corresponds to relative order of the lines in $x=-\infty$. Intuitively, this order represents the relative order of the lines for $x=-\infty$ in a way that $l_i$ lies above $l_j$ in $x=-\infty$ iff $\pi_{-\infty}(l_i) < \pi_{-\infty}(l_j)$. Formally \(\pi_{-\infty}(l_i) < \pi_{-\infty}(l_j) \Leftrightarrow x_i < x_j \) or $(x_i = x_j$ and $y_i > y_j)$. As we do not have duplicates, this order is total and unambiguous.
+				\item We create a permutation $\pi_a: L \rightarrow \{1..n\}$ such that it corresponds to relative order of the lines in $x=a$. We arbitrarily define that a line is below the other if it intersects and has previously been above. Formally we sort s.t. $\pi_a(l_i) < \pi_a(l_j) \Leftrightarrow a\cdot x_i + y_i > a\cdot x_j + y_j$ or $(a\cdot x_i + y_i = a\cdot x_j + y_j$ and $ x_i > x_j)$.
+				\item We feed the algorithm from Fact A the permutation $\pi_a$.
+				\item We return the result from the algorithm of Fact A.
+			\end{enumerate}
+			
+		\item \textbf{Runtime analysis}
+			\begin{enumerate}[(1)]
+				\item A constant time operation.
+				\item We first need to evaluate the $n$ lines at a given $x$, which can be done in $\mathcal{O}(n)$. Sorting $n$ lines can be done by done in $\mathcal{O}(n\cdot log(n))$ time, because we use a constant time comparator.
+				\item Same as previous step.
+				\item The algorithm is given to have $\mathcal{O}(n\cdot log(n))$ runtime.
+				\item Constant time operation.
+			\end{enumerate}
+			As the considered parts of the algorithm are not nested but sequential, the overall runtime is $\mathcal{O}(n\cdot log(n))$.
+		
+		\item \textbf{Correctnes} \\
+			We know that we are given the number of inversions in the permutation $\pi_a$, including permutations in $x=a$. \\
+			Hence we need to prove that the amount of inversions in the permutation $\pi_a$ is equal to the number of intersections of lines from $L$, up to and including $x=a$. We will do so by induction. \\ \\
+			\textit{Claim.} If there are $k$ lines crossing in one point, the number of inversions in the permutation increases for each pairwise intersection compared to infinitesimally left of this intersection point.  \\
+			\textit{Proof.} \\
+				\begin{enumerate}[-]
+				\item Let's inspect the base case with $k =2$. \\
+					Given that we have an intersection of lines $l_1$ and $l_2$ in $x=a$, we know that $a \cdot x_1 + y_1 = a \cdot x_2 + y_2$. As the permutation is a total order, we know that either $x_1 < x_2$ or vice versa. Let's assume $x_1 < x_2$ (the opposite is symmetric), which implies that $\pi_a(l_2) < \pi_a(l_1)$ according to the definition of $\pi_a$. 
+					CHECK THIS IFF
+					\begin{align}
+						x_1 < x_2 & \Leftrightarrow x_1 \cdot \delta < x_2 \cdot \delta (\delta \in \mathbb{R}, \delta > 0) \\
+						& \Leftrightarrow -x_1 \cdot \delta > - x_2 \cdot \delta \\
+						& \Leftrightarrow x_1 \cdot a + y_1 - x_1 \cdot \delta > x_1\cdot a + y_1 - x_2 \cdot \delta \\
+						& \Leftrightarrow x_1 \cdot (a - \delta) + y_1 > x_2 \cdot a + y_2 -  x_2 \cdot \delta \\
+						& \Leftrightarrow x_1 \cdot (a - \delta) + y_1 > x_2 \cdot (a - \delta) + y_2 \\
+						& \Leftrightarrow \pi_{a-\delta}(l_1) < \pi_{a-\delta}(l_2) \\
+					\end{align}
+					Hence we can conclude that there is exactly one inversion of the permutation for one intersection, when considering only two lines. This extends to the general case, namely intersection of precisely two lines in a set of $n$ lines, as we know that the permutation of all other lines is unaffected. We can conclude this by the fact that the permutation represents the above relationship. When we have no further intersections, no further lines can change their above relationship. \\
+				\item Now let's inspect the case for $k>2$.  \\
+					By the definition of the number of intersections, we have ${k \choose 2}$ many intersections for k lines in the point with $x$-value $a$. Our induction hypothesis tells us that those intersections give us ${k \choose 2}$ inversions in the permutation. As the new lines intersects all of the lines which already go through the point, we have ${k \choose 2} + k = {k+1 \choose 2}$ intersections. Given that we have an intersection of lines $l_i with i = 1,..,k $ and $l_k+1$ in $x=a$, we know that $a \cdot x_i + y_i = a \cdot x_{k+1} + y_{k+1}$. As the permutation is a total order, we know that either $x_i < x_{k+1}$ or vice versa for each individual $i$. We will simply say that for $k_1$ many it holds that $x_i < x_{k+1}$ and for $k_2 = k-k_1$ many $x_{k+1} < x_i$. In the analogous way to the base case, we know that
+						\begin{align}
+								&\forall i \in \{1..k_1\}\ x_i < x_{k+1} \\
+								&\Leftrightarrow \forall i \in \{1..k_1\}\ \pi_a(l_{k+1}) < \pi_a(l_i) \\
+								&\Leftrightarrow \pi_{a-\delta}(l_i) < \pi_{a-\delta}(l_{k+1}) \\
+						\end{align}
+					Hence we have $k_1$ inversions by the intersections with the lines $l_i, i \in 1..k_1$. Analogously:
+						\begin{align}
+								&\forall i \in \{k_2..k\}\  x_{k+1} < x_i \\
+								&\Leftrightarrow \forall i \in \{1..k_1\}\ \pi_a(l_i) < \pi_a(l_{k+1}) \\
+								&\Leftrightarrow \pi_{a-\delta}(l_{k+1}) < \pi_{a-\delta}(l_i) \\
+						\end{align}
+					Hence we have $k_2$ inversions by the intersections with the lines $l_i, i \in k_2..n$.
+					As we did not alter the relative order of the $k$ preexisting lines, we now that their permutation has not been influenced by the addition of the new line $l_{k+1}$. Thereby we are able to conclude that be are now confronted with ${k \choose 2} + k = {k+1 \choose 2}$ intersections leading to ${k \choose 2} + k_1 + k_2 = {k+1 \choose 2}$ inversions in the permutation at the point $x=a$.
+					
+				\end{enumerate}
+			\textit{Claim.} There is no change permutation without intersection. \\
+			\textit{Proof.} \\
+				Assume that at point $x=a$ the permutation changes wihtout any lines intersecting in that point. We now that in the previous permutation $\pi_{new}$ there needs to be at least one additional inversion compared to $\pi_{old}$. Say  $\pi_{old}(l_i) < \pi_{old}(l_j) (i)$ and $\pi_{new}(l_i) > \pi_{new}(l_j) (i)$. We can simply say that the old permutation was at $x=a-\delta$ where $\delta \in \mathbb{R}, \delta >0$.\\
+				$(i)$ implies that $(a-\delta)\cdot x_i + y_i > (a-\delta)\cdot x_j + y_j$ or $((a-\delta) \cdot x_i + y_i = a\cdot x_j + y_j$ and $ x_i > x_j)$. If the latter is true, we know that there is an intersection and the assumption was wrong.
+				$(ii)$ implies that $a\cdot x_j + y_j > a\cdot x_i + y_i$ or $(a\cdot x_j + y_j = a\cdot x_i + y_i$ and $ x_j > x_i)$. If the latter is true, we know that there is an intersection and the assumption was wrong.
+				Hence we now assume that $(a-\delta)\cdot x_i + y_i > (a-\delta)\cdot x_j + y_j$ and $a\cdot x_j + y_j > a\cdot x_i + y_i$. We define the function $f: \mathbb{R} \rightarrow \mathbb{R} with f(b) = b \cdot x_j + y_j - a\cdot x_i + y_i$. It follows immediately that $f(a-\delta) > 0$ and $f(a) < 0$. As $f$ is steady, the mean value theorem allows us to say that $\exists c \in \mathbb{R} s.t. f(c) = 0$. Therefore $c\cdot x_j + y_j = c\cdot x_i + y_i$, which is equivalent to an intersection. This, again, contradicts our fundamental assumption and proves our claim.\\
+				
+				We now know that the permutation only changes when there is an intersection and that its number of inversions is increased by the number of intersections in that intersection point. Hence, if we simply add up all the intersections we have from $x=-\infty$ up to and including $x=a$, this is equivalent to the number of inversions in the permutation from $x=-\infty$, compared to the permutation in $x=a$. As $L$ is ordered in such a fashion as the permutation would be in $=-\infty$, we have proven the correctness of our algorithm. 
+				In particular we handle the less general cases of multiple lines intersecting in one point and parallel lines.				
+				
+	\end{enumerate}
+	
+\item % 3 c
+	Let's assume that $b < c$.
+	Our algorithm from b) is able to return us the number of intersections up to a given point $x=a$ by looking at the permutation of the lines in $x=a$, which has been defined in b) as well. By querying the algorithm for $x=a$ and $x=b$ we multiply its runtime by only a constant factor, yet are able to obtain the permutation of the lines in $x=a$ as well as $x=b$. \\
+	In order to make use of the algorithm from Fact B, we need to adapt our permutations, as we need to keep in mind that both $\pi_a$ and $\pi_b$ can include inversions simultaneously. We are only looking for inversions between both. More precisely, the algorithm will assume that no the baseline of no inversions is ${1..n}$. To make this fit with the shape of our apply a mapping which maps the $i$th element of $\pi_b$ to $i$ to both $\pi_b$ and $\pi_c$. This will 
+	make $\pi_c$ represent the set of inversions from $b$ to $c$. Therefore we can feed $\pi_c$ to the algorithm from Fact B and return its result. The exptected runtime remains $\mathcal{O}(nlogn)$ as the algorithm from Fact B takes expected $\mathcal{O}(nlogn)$ runtime after applying our algorithm of $\mathcal{O}(nlogn)$ from b) twice. 
+	If $c < b$, we symmetricaly apply the above. If $c = b$, we apply it with $b=c-\delta$ where $\delta$ is the smallest number possibly represented and $c=c$. 
+
+\item % 3 d
+We are looking at the up to $\frac{n(n-1)}{2}$ many lines that pairwise connect two points from our set. Among those lines, we look for the line with the median slope. This means that we are looking for the line $l=(x,y)$ with the median $x$-value. If we have multiple lines with the same slope, we can just pick any of those.  \\
+In order to apply our previous knowledge, we apply the dual transformation of points and lines. In the dual space, our $n$ points are $n$ lines. The lines connecting the $n$ points $p=(x,y)$ correspond to the intersections of the $n$ lines $p^*=(x,-y)$. Therefore, in the dual space, we are looking for one the intersection of lines, which has median $x$-value. \\
+	\textbf{Algorithm}
+	\begin{enumerate}[(1)]
+		\item First we transform all of our $n$ points to the set of lines $L$ by applying the duality transormation.
+		\item We don't know whether we have the full $\frac{n(n-1)}{2}$ many intersections, as we allow parallel lines. In order to find out, how many intersections we have in total, we query the algorithm from b) with $x = \infty$. We call the returned result $m$.
+		\item 
+			By applying the idea from c) we will do a binary search on intersections until we found the median. 
+			\begin{enumerate}[-]
+				\item Set $left$ to $-\infty$ and $right$ to $+\infty$. 
+				\item While $left$ is not equal to $right$:
+					\begin{enumerate}[-]
+						\item Query, as in c), a random pair of lines intersecting between $left$ and $right$. Determine their intersection point by solving the linear equation and call the $x$-value of that point $x_I$. 
+						\item Query the number of intersections in $-\infty$ and up to $x_I$, , by calling the algorithm from b) two separate times. 
+						\item If $result_{x_I} - result_{-\infty} > \frac{m}{2}$ we set $right$ to $x_I$. Else we set $left$ to $x_I - \delta$, with $\delta$ the smallest positive, non-zero number.
+						\item we check whether we have found the median yet. We do so by computing the number of investions in $right$ by subtracting the result of algoirthm b) with $right - \delta$ from the result with $right$. We also subtract the query $+\infty $
+					\end{enumerate}
+				\item When we have $left$ equal to $right$, we know the $x$ of the median intersection point. To get one particular intersection point, we query the algorithm from c) once again with $right$ and $right - \delta$. This will give us any two lines with an intersection point that is exactly on $right$.
+			\end{enumerate}
+	
+		\item Hence we have two lines  with an intersection point with median $x$-value among intersection points in the dual space. In order to return the the points giving the medium slope in the intial space, we transform those lines to points by the duality transformation and return those two points.
+	\end{enumerate}
+	\textbf{Expected runtime}
+		\begin{enumerate}[(1)]
+			\item Applying the constant time transformation on $n$ elements takes $\mathcal{O}(n)$ runtime. 
+			\item One application of the algorithm from b) takes $\mathcal{O}(n\cdot log(n))$ runtime. 
+			\item Per iteration of the loop we have one application of the algorithm from c) ($\mathcal{O}(n\cdot log(n))$), a constant time solution of a linear equation, and two applications of the algorithm from a) ($\mathcal{O}(n\cdot log(n))$). Hence one loop iteration has expected runtime of $\mathcal{O}(n\cdot log(n))$. \\
+			The important question is how many loop iterations we end up having. When looking at the behaviour of the algorithm carefully, we understand that it is performing a randomized binary search on the intersections. The expected number of calls in the binary search on $n$ elements is the equivalent of the depth of a random binary search tree of $n$ elements. We know that the exptected depth of a randomized binary search tree is asymptotically logarithmic in $n$. As we have up to $\frac{n(n-1)}{2}$ many intersections, we have expected $\mathcal{O}(log(\frac{n(n-1)}{2})) = \mathcal{O}(log(n))$ depth in the binary search tree, respectively as many calls in the binary search. \\
+			Followingly, we have expected $\mathcal{O}(log(n))$ loop iterations at expected $\mathcal{O}(n\cdot log(n))$ each, which gives us $\mathcal{O}(n\cdot log^2(n))$
+			\item One application of the algorithm from c) takes expected $\mathcal{O}(n\cdot log(n))$ runtime. 
+		\end{enumerate}
+		As the considered parts of the algorithm are not nested but sequential, the overall expected runtime is $\mathcal{O}(n\cdot log^2(n))$.
+
+	\end{enumerate}	
+	\textbf{Correctness} \\
+	
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+\end{document}
