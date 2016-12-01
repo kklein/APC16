@@ -283,11 +283,59 @@ Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0].
 	\end{align}
 	We see that $\frac{3}{2} - \frac{1}{2} = 1$ and  $\frac{3}{2} - \frac{1}{3} = \frac{7}{6}$, therefore we can conclude that
 	\[ \forall n \geq 2: \mathbb{E}[Z_n^{(1)}] = \frac{3}{2} - \frac{1}{n}\]
-\item % 2 c
-\item % 2 d
+\item % 1 c
+	\begin{align}
+		Z_n^{(k)} &= |D_n^{(k)} - D_n^{(k+1)}| \text{ (definition of $Z_n^{k}$) } \\
+		&= |\sum_{i=1}^{n} A_i^{(k)} - \sum_{i=1}^{n} A_i^{(k+1)}| \text{ (definition of $D_n^{(k)}$)} \\
+		&= |\sum_{i=1}^{n}( A_i^{(k)} -  A_i^{(k+1)})| \\
+	\end{align}
+	As we know that $k$ and $k+1$ are ancestors of each other, the terms of the sum are either all $\leq 0$ or $\geq0$. Thererfore we can simplify:
+	\begin{align}
+		Z_n^{(k)} &=  \sum_{i=1}^{n}| A_i^{(k)} -  A_i^{(k+1)}| \\
+		\mathbb{E} [Z_n^{(k)}] &=  \sum_{i=1}^{n}| \mathbb{E}[A_i^{(k)}] -  \mathbb{E}[A_i^{(k+1)}]| \\
+		&=  \sum_{i=1}^{n}| \frac{1}{|i-k|+1} - \frac{1}{|i-k-1|+1}| \text{ (as we have proven in [1])} \\
+		&= \sum_{i=1}^{k} (\frac{1}{k-i+1} - \frac{1}{k+1-i+1}) + \sum_{i=k+1}^{n} (\frac{1}{i-k+1} - \frac{1}{i-k-1+1}) \\
+		&= \sum_{i=1}^{k} (\frac{1}{k-i+1} - \frac{1}{k-i+2})  + \sum_{i=k+1}^{n} (\frac{1}{i-k+1} - \frac{1}{i-k}) \\
+		&=  \sum_{i=0}^{k-1} \frac{1}{k-i} -  \sum_{i=-1}^{k-2} \frac{1}{k-i} + \sum_{i=1}^{n-k} \frac{1}{i} - \sum_{i=2}^{n-k+1} \frac{1}{i} \\
+		&= 1 - \frac{1}{k+1} + 1 - \frac{1}{n-k+1} \\
+		&= 2  - \frac{1}{k+1} - \frac{1}{n-k+1}
+	\end{align}
+We plug this into the expected value of $Z_n$.
+	\begin{align}
+		\mathbb{E}[Z_n] &=\frac{1}{n-1} \sum_{k=1}^{n-1}\mathbb{E} [Z_n^{(k)}] \\
+		&= \frac{1}{n-1} \sum_{k=1}^{n-1} ( 2  - \frac{1}{k+1} - \frac{1}{n-k+1}) \\
+		&= \frac{1}{n-1} (2 -  \sum_{k=1}^{n-1} \frac{1}{k+1} -  \sum_{k=1}^{n-1}\frac{1}{n-k+1}) \\
+		&= \frac{1}{n-1} (2 - \sum_{k=2}^{n} \frac{1}{k}  -  \sum_{k=2}^{n}\frac{1}{k}) \\
+		&= \frac{1}{n-1} (2 - H_n+1 - H_n +1)\\
+		&= \frac{2}{n-1} (2 - H_n)  \\
+	\end{align}
+\item % 1 d
+We are looking for the probability with which at least one of the three trees has $[Z_n] > 3$. Let's denote $\Pr[tree\ of\ size\ n\ has\ [Z_n] > 3]$ as $p$.
+	\begin{align}
+		\mathbb{E}[number\ of\ trees\ with [Z_n] > 3] &= 0 \cdot p^3 + 1 {3\choose 1}(p)^2(1-p) + 2{3\choose 2}(p)(1-p)^2 + 3 (1-p)^3 \\
+		&= 3p^2 - 3p^3 + 6p(1-2p+p^2) + 3(1-3p+3p^2 - p^3) \\
+		&=  3p^2 - 3p^3 + 6p - 12p^2 + 6p^3 =3 - 9p + 9p^2 -3p^3 \\
+		&= 3(1-p) \\
+		\mathbb{E}[number\ of\ trees\ with [Z_n] > 3] &\geq 1 \Leftrightarrow 3(1-p) \geq 1 \\
+		& \Leftrightarrow p \leq \frac{2}{3} \\
+ 	\end{align}
+	In order to show that this holds, let's imply a contradiction by assuming $p > \frac{2}{3}$. \\
+	Recall that the expected value of $Z_n$ can be calculated by 
+	\begin{align}
+		\mathbb{E}[Z_n] &= \sum_{t\ tree\ of\ size\ n} (Z_n\ of\ t) \cdot \Pr[t] \\
+		&=  \sum_{t\ tree\ of\ size\ n\ with\ Z_n >3} (Z_n\ of\ t) \cdot \Pr[t] +  \sum_{t\ tree\ of\ size\ n\ with\ Z_n \leq 3} (Z_n\ of\ t) \cdot \Pr[t] \\ 
+		& \geq  \sum_{t\ tree\ of\ size\ n\ with\ Z_n >3} 3 \cdot \Pr[t] +  \sum_{t\ tree\ of\ size\ n\ with\ Z_n \leq 3} (Z_n\ of\ t) \cdot \Pr[t] \\ 
+		& \geq  3 \cdot  \sum_{t\ tree\ of\ size\ n\ with\ Z_n >3}  \Pr[t] +  \sum_{t\ tree\ of\ size\ n\ with\ Z_n \leq 3} (Z_n\ of\ t) \cdot \Pr[t] \\
+		& \geq  3 \cdot p  +  \sum_{t\ tree\ of\ size\ n\ with\ Z_n \leq 3} (Z_n\ of\ t) \cdot \Pr[t] \\
+		& \geq  3 \cdot p \\
+		& >  3 \cdot \frac{2}{3} \\
+		& > 2
+	\end{align}
+	This contradicts the knowledge we have about $ \mathbb{E}[Z_n]$, namely that it is $\leq 2$. It follows that $p > \frac{2}{3}$, which is equivalent to saying that we have at least one tree among those tree which has $Z_n < 3$.
 \end{enumerate}
 
-[0] APC script 2015 Edition, Chapter 1.4 Expected Depth of Individual Keys, p.18 
+[0] APC script 2015 Edition, Chapter 1.4 Expected Depth of Individual Keys, Theorom 1.6, p.18 
+[1] APC script 2015 Edition, Chapter 1.4 Expected Depth of Individual Keys, Lemma 1.5, p.18 
 \end{homeworkProblem}
 %----------------------------------------------------------------------------------------
 %	PROBLEM 2
@@ -374,7 +422,6 @@ Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0].
 	\end{align}
 	
 \end{enumerate}
-
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------
@@ -432,7 +479,6 @@ Moreover we learned that $D_n^{(i)} = H_i - H_{n-i+1} -2$ [0].
 				\begin{enumerate}[-]
 				\item Let's inspect the base case with $k =2$. \\
 					Given that we have an intersection of lines $l_1$ and $l_2$ in $x=a$, we know that $a \cdot x_1 + y_1 = a \cdot x_2 + y_2$. As the permutation is a total order, we know that either $x_1 < x_2$ or vice versa. Let's assume $x_1 < x_2$ (the opposite is symmetric), which implies that $\pi_a(l_2) < \pi_a(l_1)$ according to the definition of $\pi_a$. 
-					CHECK THIS IFF
 					\begin{align}
 						x_1 < x_2 & \Leftrightarrow x_1 \cdot \delta < x_2 \cdot \delta (\delta \in \mathbb{R}, \delta > 0) \\
 						& \Leftrightarrow -x_1 \cdot \delta > - x_2 \cdot \delta \\
@@ -489,12 +535,11 @@ In order to apply our previous knowledge, we apply the dual transformation of po
 			By applying the idea from c) we will do a binary search on intersections until we found the median. 
 			\begin{enumerate}[-]
 				\item Set $left$ to $-\infty$ and $right$ to $+\infty$. 
-				\item While $left$ is not equal to $right$:
+				\item While $left < right$:
 					\begin{enumerate}[-]
 						\item Query, as in c), a random pair of lines intersecting between $left$ and $right$. Determine their intersection point by solving the linear equation and call the $x$-value of that point $x_I$. 
-						\item Query the number of intersections in $-\infty$ and up to $x_I$, , by calling the algorithm from b) two separate times. 
-						\item If $result_{x_I} - result_{-\infty} > \frac{m}{2}$ we set $right$ to $x_I$. Else we set $left$ to $x_I - \delta$, with $\delta$ the smallest positive, non-zero number.
-						\item we check whether we have found the median yet. We do so by computing the number of investions in $right$ by subtracting the result of algoirthm b) with $right - \delta$ from the result with $right$. We also subtract the query $+\infty $
+						\item Query the number of intersections in $-\infty$, up to $x_I - \delta$ and up to $x_I$ by calling the algorithm from b) three separate times with $\delta$ the smallest positive, non-zero number.
+						\item If $result_{x_I} - result_{-\infty} > \frac{m}{2}$ and $result_{x_I-\delta} - result_{-\infty} < \frac{m}{2}$ , we know that we have the median intersection in $x_I$ and hence break the while loop. In order to store the result, we set $right=left=x_I$. Else if  $result_{x_I} - result_{-\infty} > \frac{m}{2}$ we set $right$ to $x_I $. Else we set $left$ to $x_I -\delta$.
 					\end{enumerate}
 				\item When we have $left$ equal to $right$, we know the $x$ of the median intersection point. To get one particular intersection point, we query the algorithm from c) once again with $right$ and $right - \delta$. This will give us any two lines with an intersection point that is exactly on $right$.
 			\end{enumerate}
@@ -505,7 +550,7 @@ In order to apply our previous knowledge, we apply the dual transformation of po
 		\begin{enumerate}[(1)]
 			\item Applying the constant time transformation on $n$ elements takes $\mathcal{O}(n)$ runtime. 
 			\item One application of the algorithm from b) takes $\mathcal{O}(n\cdot log(n))$ runtime. 
-			\item Per iteration of the loop we have one application of the algorithm from c) ($\mathcal{O}(n\cdot log(n))$), a constant time solution of a linear equation, and two applications of the algorithm from a) ($\mathcal{O}(n\cdot log(n))$). Hence one loop iteration has expected runtime of $\mathcal{O}(n\cdot log(n))$. \\
+			\item Per iteration of the loop we have one application of the algorithm from c) ($\mathcal{O}(n\cdot log(n))$), a constant time solution of a linear equation, and three applications of the algorithm from a) ($\mathcal{O}(n\cdot log(n))$). Hence one loop iteration has expected runtime of $\mathcal{O}(n\cdot log(n))$. \\
 			The important question is how many loop iterations we end up having. When looking at the behaviour of the algorithm carefully, we understand that it is performing a randomized binary search on the intersections. The expected number of calls in the binary search on $n$ elements is the equivalent of the depth of a random binary search tree of $n$ elements. We know that the exptected depth of a randomized binary search tree is asymptotically logarithmic in $n$. As we have up to $\frac{n(n-1)}{2}$ many intersections, we have expected $\mathcal{O}(log(\frac{n(n-1)}{2})) = \mathcal{O}(log(n))$ depth in the binary search tree, respectively as many calls in the binary search. \\
 			Followingly, we have expected $\mathcal{O}(log(n))$ loop iterations at expected $\mathcal{O}(n\cdot log(n))$ each, which gives us $\mathcal{O}(n\cdot log^2(n))$
 			\item One application of the algorithm from c) takes expected $\mathcal{O}(n\cdot log(n))$ runtime. 
@@ -514,6 +559,9 @@ In order to apply our previous knowledge, we apply the dual transformation of po
 
 	\end{enumerate}	
 	\textbf{Correctness} \\
+		When the algorithm returns a pair lines, we know that they intersect in $right = left$. $Right$ has either been set to$left$ explicitly or implicitly.\\
+		If it has been set explicitly, we found ourselves in the situation where there are $\frac{m}{2}$ many intersections strictly left of $right$ and $\frac{m}{2}$ many from the very left to and including $ right$. Therefore we know that the median element has to lie in $right$. As all of the intersections in $right$ are equivalent with respect the median $x$-coordinate, any of the reported pair of lines intersecting in $right$ is having median $x-value$. Thereby, in the dual space, the line connecting the two points has median slope. \\
+		If it has been set implicitly, we know that either the algorithm has made $left$ pass $right$ or that both are equal. If both are equal, we know that there are no more intersections for which either more than half of the intersections are lying on the left and not more than half of the intersections are lying right. This is the definition of the median. If left has strictly surpassed right, we know the last movement of the right pointer, for some inspected $x_R$, there were $> \frac{m}{2}$ intersections to the left of $x_R$. In the last step before $left$ suprassed right, they must have drawn $x_I=right$ as the $x_I$ are drawn from the range $left$ to $right$. As right was not moved in that draw of $x_I$ we know it holds that there are $\leq \frac{m}{2}$ intersections to the left of $x_I$. Furthermore, as we know that $x_{last} = right$ and that the last $x_I$ $right$ was moved to was $x_R$ it follows $x_{last} = x_R$. As we know that there are $> \frac{m}{2}$ to the left of $x_R$, this also holds for $x_last$. this is a contradiction to what we have just established and hence this case cannot happen.
 	
 
 \end{homeworkProblem}
