@@ -192,7 +192,7 @@
 \newcommand{\hmwkTitle}{Special Assignment 2} % Assignment title
 \newcommand{\hmwkDueDate}{6\ December\ 2016} % Due date
 \newcommand{\hmwkClass}{Algorithms, Probability and Computing} % Course/class
-\newcommand{\hmwkClassInstructor}{Prof. Steger, Prof. Holenstein, Prof. Welzl} % Teacher/lecturer
+ \newcommand{\hmwkClassInstructor}{} % Teacher/lecturer
 \newcommand{\hmwkAuthorName}{Kevin Klein} % Your name
 
 %----------------------------------------------------------------------------------------
@@ -231,7 +231,80 @@
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
+\begin{enumerate}[(a)]
+%%%%% a)
+\item
+	For the sake of contradiction, let's assume \(\tau(F) < \mu(F)\).\\
+	Say \( \tau(F) = min\ |T| = k\). Sizes of sets must be integers, hence \(k \in \mathbb{N}\). It follows directly that \(\mu(F)=max\ |M| \geq k+1\). The latter expresses that \(k+1\) flags can be simultaneously  represented without assigning a dancer to more than one flag. These \(k+1\) flags of the Olympic matching are by definition pairwise dstinct, meaning that no color is present in more than one of those flags. \\
+	By definition, an Olympic traversal has to pass all flags and thereby also the \(k+1\) flags in the Olympic matching. However, as those flags are mutually distinct, the necessary amount of colors to traverse the matching is \(k+1\). This number can only increase when adding colors to traverse flags which are not part of the Olympic matching. Hence \(\tau(F) \geq k+1 \). \\
+	This contradicts are assumption. Therefore we have proven that \( \mu(F) \leq \tau(F) \). 
 
+%%%%% b)
+\item
+	Firstly, we need to show that such a \( \tau^{*}(F)\) exists. In order to do so we demonstrate that LP-T is bounded and feasible, which implies existance of an optimal solution. \\
+	The cost function increases with every component of x. This is to say that it will attain minimal value if the components of x are 'as small as possible'. However, due to the constraint that \(x \geq 0 \), we know that the components of \(x\) must be at least \(0\). When can thereby formulate the lower bound \( 1_n^T 0_n = 0 \) for the minimized result. Thusly, LP-T is bounded. \\
+	In order to show that LP-T is feasible, we will look at the structure of \(A\). The matrix knowingly consists of solely \(0's\) and \(1's\). Using the information that each flag uses at least one colour, we can tell that every row holds at least one \(1\). In order to satisfy the constraint that the dotproduct of each row with \(x\) is larger or equal to \(1\), we can simply set all components of \(x\) to \(1\). Furthermore, \(x = 1_n\) also trivially satisfies the remaining constraint, namely \(x \leq 0\). Thererfore \(x\) is a witness for feasibility of LP-T. \\
+	We now know that LP-T is bounded, feasible and thereby has an optimal solution \( \tau^{*}(F) \). \\
+	When closeely observing the definition of \( T\) and \(\tau(F)\), it becomes apparent, that we can express it as an integer linear program with strong resemblance to LP-T. Instead of declaring \(T\) as a set, we can express \(T\) as the vector \(x\), indicating \(x_i = \mathbb{I}[c_i \in T ]\). It follows directly that \( \tau(F) = |T| = \sum_{i=1}^{n} x_i = 1_n ^Tx \). The constraint that the traversal \(x\) must include at least one color of each flag, can be enforced by counting the number of colors each flag and the traversal have in common and making sure this count is always at least 1. This corresponds to the dotproduct between a row of \(A\), representing the colors in a flag, and the traversal \(x\). We can thereby formulate \(\tau(F)\) as the optimal value resulting from:
+	\[ minimize\ 1_n^Tx,\ subject\ to\ Ax \geq 1_m,\ x \in \{0,1\}^n 
+	\]
+	We can argue analogously that this integer linear program has an optimal value. \\
+	The integer LP we came to formulate is only more restrictive than LP-T. Hence, a traversal \(x\) leading to the optimal value for the integer linear program, will yield the same value for LP-T. Yet, LP-T might allow for an even better solution, as we will show in c). We have proven that \(\tau^{*}(F) \leq \tau(F)\).
+
+%%%%% c)
+\item
+	Suppose the flags \( f_1 = \{c1,c2\},\ f_2 = \{c1,c3\},\ f_3 = \{c2,c3\} \). \\
+	In other words:
+	\[
+	A = \begin{bmatrix}
+		1 & 1 & 0 \\
+		1 & 0 & 1 \\
+		0 & 1 & 1 \\
+	\end{bmatrix}
+	\]
+	We see that no color is contained in all three flags. Hence the traversal will require at least two colors. We write \( \tau(F) \geq 2 \). 
+	Let us inspect \( x_S = \begin{bmatrix}
+		0.5 & 0.5 & 0.5 \\
+	\end{bmatrix}^T \). Firstly, our \(x_s\) satisfies \(x \geq 0_n\). Secondly 
+	\[
+	A \cdot x_s =  \begin{bmatrix}
+		1 & 1 & 0 \\
+		1 & 0 & 1 \\
+		0 & 1 & 1 \\
+	\end{bmatrix} \cdot \begin{bmatrix}
+		0.5 \\
+		0.5 \\
+		0.5 \\
+	\end{bmatrix} =  \begin{bmatrix}
+		1 \\
+		1 \\
+		1 \\
+	\end{bmatrix} \geq 1_m.
+	\]
+	Thereby, we can conclude that \(x_s\) is a feasible solution for LP-T. Furthermore, the optimal value \(\tau^{*} (F) \) must be smaller or equal to the value that the cost function yields for $x_s$. This follows from the simple fact that the cost function is minimizing. Hence \(\tau^{*}(F) <= 1_n^T \cdot x_s = 1.5\). \\
+	It follows directly that \(\tau^{*}(F) \leq \tau(F) \).
+	
+%%%% d)
+\item
+	In order to prove \(\mu(F) \leq \tau(F) \) we will first show \( \mu(F) \leq \mu^{*}(F)\) followed by \( \mu^{*}(F) \leq \tau(F) \). \\
+	We define \( \mu^{*}(F) \) to be the optimal value of the following linear program LP-D: \\
+	\[ maximize\ 1_m^T y\ subject\ to\ A^Ty \leq 1,\ y \geq 0
+	\]
+	We observe that LP-D corresponds to the definition of the dual of LP-T. As we have shown that LP-T is bounded and has optimal value \(\tau^{*}(F)\), the Strong Duality Theorem tells us that LP-D has optimal value \(\tau^{*}(F)\). \\
+	Similarly as in (b), we will translate the meaning of an Olympic matching \(M\) to an integer linear program and show that this integer linear program is only more constrained than LP-D. \\
+	Instead of declaring \(M\) as a set, we can express \(M\) as the vector \(y\), indicating \(y_i = \mathbb{I}[f_i \in M]\). It follows directly that \( \mu(F) = |M| = \sum_{i=1}^{m} y_i = 1_m ^Ty \). The constraint that the matching \(y\) must assign each color to at most one flag, i.e. the flags are pairwise distinct, can be enforced by counting the number of flags each color appears in and making sure this count is always at most 1. This corresponds to the dotproduct between a row of \(A^T\), representing for all flags whether they contain a specific color, and the matching \(y\). We can thereby formulate \(\mu(F)\) as the optimal value resulting from:
+	\[ maximize\ 1_m^T y\ subject\ to\ A^Ty \leq 1,\ y \in \{0,1\}^m
+	\]
+	\(y = 1_m\) yields an upper lower bound for \(\mu(F)\), namely \(1_m^{T}1_m = m\). \(y = 0_m\) yields an obvious feasible solution. Hence the integer linear program has an optimal solution \(\mu(F)\). \\
+	The integer LP we came to formulate is only more restrictive than LP-D. Hence, a matching \(y\) leading to the optimal value for the integer linear program, will yield the same value for LP-D. Yet, LP-T might allow for an even better, i.e. larger, solution, as it is less restrictive and maximizing the cost function. We have proven that \(\mu(F) \leq \mu^{*}(F)\).
+	
+	Thanks to the Strong Duality Theorom we know that \(\mu^{*}(F) = \tau^{*}(F)\). (b) tells us that \(\tau^{*}(F) \leq \tau(F)\) which implies \(\mu^{*}(F) \leq \tau(F)\).
+	
+	We have proven that \(\mu(F) \leq \tau(F) \).
+	
+	
+	
+\end{enumerate}
 \end{homeworkProblem}
 
 
