@@ -351,20 +351,13 @@
 	In order to argue that all \(\tilde{x_j}\) are integers, we will look at both numerator and denominator of the fraction. 
 	\begin{enumerate}
 		\item \(det|\tilde{A_j}|\) \\
-			Let's do a case distiction on \(\tilde{x_j}\). 
-			\begin{enumerate} [a)]
-			\item \(\tilde{x_j}\) satisfies a constraint from \(x \geq 0\) with equality. \\
-				We know that this means that there is a row \(i\) in \(\tilde{A}\) which contains a 1 in position \(j\) and else only 0's. Furthermore we know that \( \tilde{b} \) must hold 0 in position \(i\). We can think of it as \(  \begin{bmatrix} 0 & \dots & 0 & 1 & 0 & \dots & 0 \\\end{bmatrix} \cdot \tilde{x} = 0\). Now as the column \(j\) of \(\tilde{A}\) is replaced by \( \tilde{b} \) and the \(i\)th row \(\tilde{A_j}\) is all 0's. The sole 1 in the row, precisely in \(\tilde{A[i][j]}\), is replaced by the 0 in \(\tilde{b_i}\). \\
-				We now have a row of 0's in \(\tilde{A_j}\). This, in turn implies that \(\tilde{A_j}\) is not invertible and hence \(det|\tilde{A_j}| = 0\).
- 			\item \(\tilde{x_j}\) satisfies a constraint from \(Ax \geq 1_m\) with equality. \\
- 				As \(\tilde{A}\tilde{x} = \tilde{b}\), we can express 
-			\end{enumerate}
+			\(\tilde{A}\) contains only 0's and 1's. So does \(\tilde{b}\). Hence \(\tilde{A_j}\) only contains 0's and 1's. When calculating the determinant we will only add, multiply and adapt the sign of elements. Adding, multiplying and changing signs of integers will result in an integer. Therefore \(det|\tilde{A_j}| \in \mathbb{N}\).
 		\item \({det|\tilde{A}|}\) \\
 			We know that the rows originating from the constraint \(x \geq 0\) containt exaclty one \(1\). For all those rows, we compute recursively compute minors, which always consists of the determinant of a minor multiplied by either \(1\) or \(-1\). When we run out of those rows, we only have rows left from the constraint \(Ax \geq 1_m\). Thusly, those remaining rows stem from A, in other words, the matrix of remaining rows is a submatrix of A. as we have shown in (ii), this submatrix yields a determinant of either -1, 0 or 1. Therefore  \({det|\tilde{A}|}\) is of the form \( (-1)^k\cdot det|M|,\ det|M\ \in \{-1,0,1\}\).\\
 			As \(\tilde{A}\) contains n linearly independent rows, we know that its determinant cannot equal \(0\). \\
 			It follows that \({det|\tilde{A}|} \in \{-1,1\}\).
 	\end{enumerate}
-	
+	We can come to the conclusion that \( \forall j \in \{1,..,n\},\ \tilde{x_j} = det|\tilde{A_j}|\ or\ \tilde{x_j} = -det|\tilde{A_j}|\). As \(det|\tilde{A_j}| \in \mathbb{N},\ x_j \in \mathbb{N}\). Hence \(x\) is integral.
 	
 	%%%%% iv)
 	\item
@@ -379,7 +372,8 @@
 		We notice that all those constraints would also be satisfied with \(k=1\). As we know that all constraints would still be satisfied for \(k=1\), no other component would have to be adapted and the cost function is simply adding up the components of \(x\), our \(x\) was not optimal. \\
 		We now know that we can add the constraint \(x \in \{0,1\}^n\) to LP-T without influencing the optimal value \(\tau^*(F)\). Yet this corresponds exactly to the integer Linear Program with optimal value \(\tau(F)\). Hence \(\tau^*(F) = \tau(F)\). 
 	%%%%% v)
-	\item
+	\item We will prove \( \mu(F) = \tau(F)\) by showing that \( \mu^*(F) = \mu(F)\). This suffices as we know from (d) that \( \mu^*(F) = \tau^*(F) \) as well as \(\tau^*(F)  = \tau(F)\) from (f)(iv). \\
+	
 	\end{enumerate}
 	
 	
