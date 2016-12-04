@@ -301,7 +301,74 @@
 	Thanks to the Strong Duality Theorom we know that \(\mu^{*}(F) = \tau^{*}(F)\). (b) tells us that \(\tau^{*}(F) \leq \tau(F)\) which implies \(\mu^{*}(F) \leq \tau(F)\).
 	
 	We have proven that \(\mu(F) \leq \tau(F) \).
+
+%%%% e)
+\item
+
+%%%% f)
+\item
+	\begin{enumerate}[(i)]
+	%%%%% i)
+	\item
+		We want to show that the columns of \(A\) are linearly independent. \\
+		Thanks to the special structure of \(A\), we know that each row contains exactly two \(1\)'s and all other components equal \(0\). 
+		Let's inspect an arbitrary column of \(A\) called \(C_j\). 
+		If \(C_j = 0\) we can trivially represent \(C_j\) as a combination of other columns and our claim is proven. \\
+		Hence we now assume \(C_j \neq 0\). \\
+		Let's say that \(A[i,j] = C_j[i] = 1\). As every row contains two \(1\)'s, we know that \(\exists i'\neq i, i' \in \{1,..,m\}\) with \(A[i',j] = 1\).
+		
+		
+		Alternative \\
+		If \(m < n\), we know that \( rank(A) \leq dim(rowspace(A)) \leq m\).
+		We also know that \( number\ lin.\ ind.\ colums = rank(A) \). Hence \(number\ lin.\ ind.\ colums \leq m < n\). Therefore the columns are linearly dependent. \\
+		If \(m \geq n \), we claim that the rows span an \(n-1\) dimensional space. This implies that the rank is \(n-1\) and thereby no \(n\) columns can be linearly independent.
+		
+	%%%%% ii)
+	\item
+	In order to show that for each square submatrix \(S\) of \(A\) \(det|S| \in \{-1,0,1\} \), we will proceed by induction. We will say that \(S\) is of size \(i\) by \(i\). \\
+	\textit{Base case: i = 1} \\
+	\[\forall i \in \{1,..,m\},\ \forall j \in \{1,..,n\}\ A[i,j] \in \{0,1\}\ \Rightarrow det|S| \in \{0,1\}\]
+	\textit{Induction step: } \(i \rightarrow i+1\) \\
+	In order to make use of our induction hypothesis, we want to compute \(det|S|\), with \(S\) of size \(i+1\) by \(i+1\), by its minors, of size \(i\) by \(i\). Thanks to the fact that \(S\) is a submatrix of \(A\), we can assume that each row of \(S\) has either no, one or two \(1\)'s. Furthermore we know that we can pick any row to calculate \(det|S|\) by corresponding minors. 
+	We make the following case distinction:
+	\begin{enumerate}[a)]
+		\item There is one row in \(S\) with all \(0\)'s. \\
+			\(det|S|\) will be calculated by adding the determinant of all minors, scaled by the corrsponding elements of the row. As the latter are all \(0\), it follows immediately that \(det|S| = 0\). 
+		\item There is no row in row in \(S\) with all \(0\)'s, there is one row in \(S\) with exactly one \(1\). \\
+			\(det|S|\) will be calculated by adding the determinant of all minors, scaled by the corrsponding elements of the row. Hence all determinants of minors but one, call it \(M\) can be ignored. Our induction hypotehsis tells us that \(det|M| \in \{-1,0,1\} \) because \(M\) is of size \(i\) by \(i\) and by definition a submatrix of \(A\). Hence \(det|S|=1\cdot det|M|\) which direcly implies our claim.
+		\item There are only rows in \(S\) with exactly two \(1\)'s. \\
+			We have two crucial indications about this \(S\). The first one is that it is a submatrix of \(A\). This implies that it has to fulfill the requirement that if two colors are chosen in one row, one of them must be light and the orther dark. We do not reassign colors, hence this must still hold. The second one is that we have two colors in each row of \(S\). \\
+			Hence \(S\) would represent a legitimate incidence matrix according to the definition of (f). \\
+			Yet we came to prove in (f)(i), that all incidence matrices as described in (f) do have linearly dependent columns. In the case of square matrices, this implies that they are not 'full-rank' or 'invertible'. This again implies that the determinant must be 0. We can conclude \(det|S|=0 \)/
+	\end{enumerate} 
+	The case distinction is exhaustive and leads a desired result for each case. Hence we have proven the desired statement.
+	%%%%% iii)
+	\item 
+	In order to prove that every basic feasible solution is integral, we first look at the definition of a basic feasible solution. Any basic feasbile solution must satisfy n linearly independent constraints with equality. We say that a basic feasible solution \(\tilde{x}\) solves \(\tilde{A} \dot x = \tilde{b}\) where \(\tilde{A}\) and \(\tilde{b}\) represent n linearly independent constraints from either \(Ax \geq 1_m\) or \(x \geq 0 \). \\
+	Cramer's rule tells us that the \(j\)-th component of our basic feasible solution can be computed by:
+	\[ \tilde{x_j} = \frac{det|\tilde{A_j}|}{det|\tilde{A}|},\ \ \ \ \ \ \  j \in \{1,..,n\}\]
+	where \(\tilde{A_j}\) corresponds to \(\tilde{A}\) and replacing its jth column with \(\tilde{b}\).
+	In order to argue that all \(\tilde{x_j}\) are integers, we will look at both numerator and denominator of the fraction. 
+	\begin{enumerate}
+		\item \(det|\tilde{A_j}|\) \\
+			Let's do a case distiction on \(\tilde{x}\). 
+			\begin{enumerate} [a)]
+			\item \(\tilde{x}\) satisfies at least one constraint from \(x \geq 0\) with equality.
+ 			\item \(\tilde{x}\) satisfies all and only constraints from \(Ax \geq 1_m\) with equality.
+			\end{enumerate}
+		\item \({det|\tilde{A}|}\) \\
+			We know that the rows originating from the constraint \(x \geq 0\) containt exaclty one \(1\). For all those rows, we compute recursively compute minors, which always consists of the determinant of a minor multiplied by either \(1\) or \(-1\). When we run out of those rows, we only have rows left from the constraint \(Ax \geq 1_m\). Thusly, those remaining rows stem from A, in other words, the matrix of remaining rows is a submatrix of A. as we have shown in (ii), this submatrix yields a determinant of either -1, 0 or 1. Therefore  \({det|\tilde{A}|}\) is of the form \( (-1)^k\cdot det|M|,\ det|M\ \in \{-1,0,1\}\).\\
+			As \(\tilde{A}\) contains n linearly independent rows, we know that its determinant cannot equal \(0\). \\
+			It follows that \({det|\tilde{A}|} \in \{-1,1\}\).
+	\end{enumerate}
 	
+	
+	%%%%% iv)
+	\item
+	
+	%%%%% v)
+	\item
+	\end{enumerate}
 	
 	
 \end{enumerate}
