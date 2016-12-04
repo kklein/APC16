@@ -311,18 +311,12 @@
 	%%%%% i)
 	\item
 		We want to show that the columns of \(A\) are linearly independent. \\
-		Thanks to the special structure of \(A\), we know that each row contains exactly two \(1\)'s and all other components equal \(0\). 
-		Let's inspect an arbitrary column of \(A\) called \(C_j\). 
-		If \(C_j = 0\) we can trivially represent \(C_j\) as a combination of other columns and our claim is proven. \\
-		Hence we now assume \(C_j \neq 0\). \\
-		Let's say that \(A[i,j] = C_j[i] = 1\). As every row contains two \(1\)'s, we know that \(\exists i'\neq i, i' \in \{1,..,m\}\) with \(A[i',j] = 1\).
-		
-		
-		Alternative \\
+		Thanks to the special structure of \(A\), we know that each row contains exactly two \(1\)'s and all other components equal \(0\). \\
 		If \(m < n\), we know that \( rank(A) \leq dim(rowspace(A)) \leq m\).
 		We also know that \( number\ lin.\ ind.\ colums = rank(A) \). Hence \(number\ lin.\ ind.\ colums \leq m < n\). Therefore the columns are linearly dependent. \\
-		If \(m \geq n \), we claim that the rows span an \(n-1\) dimensional space. This implies that the rank is \(n-1\) and thereby no \(n\) columns can be linearly independent.
-		
+		If \(m \geq n \), we proceed by contradiction. Let's assume that \(A\) has n linear independent columns and hence \(rank(A) = n\). The 'rank-nullity theorem' tells us that \( n = rank(A) + dim(kernel(A)) \). Therefore the dimension of the kernel is 0 and \(Av = 0\) can only hold for \(v = 0\). Say there are \(k \) light colors and hence \(n-k\) dark colors. We construct the vector:
+		\[v_0 \in \{0,1\}^n,\ v_0[i] = \begin{cases}1\ & if\ c_i\ bright\\ -1\ & otherwise\end{cases}\]
+		As we know that each row of \(A\) contains a 1 for exactly one bright and one dark color and all other elements 0, all of the multiplications between rows and \(v_0\) will return 0. In other words, \(v \neq 0, Av = 0\). Therefore the kernel of A must have at least dimension 1. This contradicts our assumption that A has rank n. Thereby, A cannot have n linearly independent columns. 
 	%%%%% ii)
 	\item
 	In order to show that for each square submatrix \(S\) of \(A\) \(det|S| \in \{-1,0,1\} \), we will proceed by induction. We will say that \(S\) is of size \(i\) by \(i\). \\
@@ -342,6 +336,7 @@
 			Yet we came to prove in (f)(i), that all incidence matrices as described in (f) do have linearly dependent columns. In the case of square matrices, this implies that they are not 'full-rank' or 'invertible'. This again implies that the determinant must be 0. We can conclude \(det|S|=0 \)/
 	\end{enumerate} 
 	The case distinction is exhaustive and leads a desired result for each case. Hence we have proven the desired statement.
+	
 	%%%%% iii)
 	\item 
 	In order to prove that every basic feasible solution is integral, we first look at the definition of a basic feasible solution. Any basic feasbile solution must satisfy n linearly independent constraints with equality. We say that a basic feasible solution \(\tilde{x}\) solves \(\tilde{A} \dot x = \tilde{b}\) where \(\tilde{A}\) and \(\tilde{b}\) represent n linearly independent constraints from either \(Ax \geq 1_m\) or \(x \geq 0 \). \\
@@ -353,7 +348,7 @@
 		\item \(det|\tilde{A_j}|\) \\
 			\(\tilde{A}\) contains only 0's and 1's. So does \(\tilde{b}\). Hence \(\tilde{A_j}\) only contains 0's and 1's. When calculating the determinant we will only add, multiply and adapt the sign of elements. Adding, multiplying and changing signs of integers will result in an integer. Therefore \(det|\tilde{A_j}| \in \mathbb{N}\).
 		\item \({det|\tilde{A}|}\) \\
-			We know that the rows originating from the constraint \(x \geq 0\) containt exaclty one \(1\). For all those rows, we compute recursively compute minors, which always consists of the determinant of a minor multiplied by either \(1\) or \(-1\). When we run out of those rows, we only have rows left from the constraint \(Ax \geq 1_m\). Thusly, those remaining rows stem from A, in other words, the matrix of remaining rows is a submatrix of A. as we have shown in (ii), this submatrix yields a determinant of either -1, 0 or 1. Therefore  \({det|\tilde{A}|}\) is of the form \( (-1)^k\cdot det|M|,\ det|M\ \in \{-1,0,1\}\).\\
+			We know that the rows originating from the constraint \(x \geq 0\) containt exaclty one \(1\). For all those rows, we recursively compute minors, which always consist of the determinant of a minor multiplied by either \(1\) or \(-1\). When we run out of those rows, we only have rows left from the constraint \(Ax \geq 1_m\). Thusly, those remaining rows stem from A, in other words, the matrix of remaining rows is a submatrix of A. as we have shown in (ii), this submatrix yields a determinant of either -1, 0 or 1. Therefore  \({det|\tilde{A}|}\) is of the form \( (-1)^k\cdot det|M|,\ det|M\ \in \{-1,0,1\}\).\\
 			As \(\tilde{A}\) contains n linearly independent rows, we know that its determinant cannot equal \(0\). \\
 			It follows that \({det|\tilde{A}|} \in \{-1,1\}\).
 	\end{enumerate}
