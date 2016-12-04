@@ -351,10 +351,13 @@
 	In order to argue that all \(\tilde{x_j}\) are integers, we will look at both numerator and denominator of the fraction. 
 	\begin{enumerate}
 		\item \(det|\tilde{A_j}|\) \\
-			Let's do a case distiction on \(\tilde{x}\). 
+			Let's do a case distiction on \(\tilde{x_j}\). 
 			\begin{enumerate} [a)]
-			\item \(\tilde{x}\) satisfies at least one constraint from \(x \geq 0\) with equality.
- 			\item \(\tilde{x}\) satisfies all and only constraints from \(Ax \geq 1_m\) with equality.
+			\item \(\tilde{x_j}\) satisfies a constraint from \(x \geq 0\) with equality. \\
+				We know that this means that there is a row \(i\) in \(\tilde{A}\) which contains a 1 in position \(j\) and else only 0's. Furthermore we know that \( \tilde{b} \) must hold 0 in position \(i\). We can think of it as \(  \begin{bmatrix} 0 & \dots & 0 & 1 & 0 & \dots & 0 \\\end{bmatrix} \cdot \tilde{x} = 0\). Now as the column \(j\) of \(\tilde{A}\) is replaced by \( \tilde{b} \) and the \(i\)th row \(\tilde{A_j}\) is all 0's. The sole 1 in the row, precisely in \(\tilde{A[i][j]}\), is replaced by the 0 in \(\tilde{b_i}\). \\
+				We now have a row of 0's in \(\tilde{A_j}\). This, in turn implies that \(\tilde{A_j}\) is not invertible and hence \(det|\tilde{A_j}| = 0\).
+ 			\item \(\tilde{x_j}\) satisfies a constraint from \(Ax \geq 1_m\) with equality. \\
+ 				As \(\tilde{A}\tilde{x} = \tilde{b}\), we can express 
 			\end{enumerate}
 		\item \({det|\tilde{A}|}\) \\
 			We know that the rows originating from the constraint \(x \geq 0\) containt exaclty one \(1\). For all those rows, we compute recursively compute minors, which always consists of the determinant of a minor multiplied by either \(1\) or \(-1\). When we run out of those rows, we only have rows left from the constraint \(Ax \geq 1_m\). Thusly, those remaining rows stem from A, in other words, the matrix of remaining rows is a submatrix of A. as we have shown in (ii), this submatrix yields a determinant of either -1, 0 or 1. Therefore  \({det|\tilde{A}|}\) is of the form \( (-1)^k\cdot det|M|,\ det|M\ \in \{-1,0,1\}\).\\
@@ -365,7 +368,16 @@
 	
 	%%%%% iv)
 	\item
-	
+		We know from (b) that \(\tau^*(F)\) is the optimal value of the feasible and bounded linear program LP-T. \\
+		Theorem 6.1 allows us to conlcude that a basic feasible solution can attain this optimal value \(\tau^*(F)\).
+		We have shown in iii), that all basic feasible solutions are integral. \\
+		Combining this knowledge, we know that there is an integral optimal basic feasible solution. \\
+		We have argued in b) that \(\tau(F)\) is the optimal value of an integer linear program, which is only more restrive than LP-T. Precisely, it only allows components of the solution to be either 0 or 1. As we already know that we can reach the optimal value of LP-T with integral value, it only remains to show that the optimal basic solution does not contain integers other than 0 and 1, to prove that both optimal values must be equal. \\
+		We will prove this via contradiction. \\
+		Let's assume that the optimal basic feasible solution \(x\) of LP-T has a component \(j'\) of value \(k \notin \{0,1\}\).	As \(x \geq 0\) holds for all feasible solutions, \(k\) must be positive. To be explicit, \(k \in \{2,3,..\}\). Let's look at the constraints \(Ax \geq 1\). For each row \(i\) in \(A\) in which the \(j'\)th component is 0, the value of \(x_j'\) does not matter. For all others, the constraint corresponds to the following: 
+		\[ A_ix \geq 1 \Leftrightarrow \sum_{j=1}^m A[i][j]*x[j] = 1 \cdot k + \sum_{j=1, j \neq j'}^m A[i][j]*x[j] \geq 1\]
+		We notice that all those constraints would also be satisfied with \(k=1\). As we know that all constraints would still be satisfied for \(k=1\), no other component would have to be adapted and the cost function is simply adding up the components of \(x\), our \(x\) was not optimal. \\
+		We now know that we can add the constraint \(x \in \{0,1\}^n\) to LP-T without influencing the optimal value \(\tau^*(F)\). Yet this corresponds exactly to the integer Linear Program with optimal value \(\tau(F)\). Hence \(\tau^*(F) = \tau(F)\). 
 	%%%%% v)
 	\item
 	\end{enumerate}
