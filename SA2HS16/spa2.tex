@@ -304,7 +304,20 @@
 
 %%%% e)
 \item
-
+	Let's inspect the probablity to intersect a specific flag when drawing a color according to \(p\). We intersecting if we fraw any of the colors containted in the flag. Using \(p\), this gives us:
+	\[ \Pr [f_i] = \frac{\sum_{j=1}^n \mathbb{I}[c_j \in f_k]\cdot x_i^*} {\sum_{j=1}^n x_j^*} = \frac{A_i x^*}{\sum_{j=1}^n x_j^*} = \frac{A_i x^*}{\tau^*(F)}\]
+	The probability of not intersecting a certain flag upon drawing a color is hence:
+	\[1 - \Pr [f_i] = \frac{\tau^*(F)}{\tau^*(F)} - \frac{A_i x^*}{\tau^*(F)} = \frac{1_n^Tx^*-A_i x^*}{\tau^*(F)} = \frac{(1_n^T-A_i) x^*}{\tau^*(F)}\] 
+	The probability of not intersecting a certain flag upon drawing s colors, possibly with repetitions, is hence:
+	\[(1 - \Pr [f_i])^s = (\frac{(1_n^T-A_i) x^*}{\tau^*(F)})^s\]
+	After such handy clarifications, let's look at what we actually want to show.
+	\begin{align}
+		 \mathbb{E}[\# flags\ not\ intersected\ by\ s\ draws] &= \mathbb{E}[\sum_{i=1}^m \mathbb{I}[f_i\ not\ intersected]] \\
+	&= \sum_{i=1}^m \mathbb{E}[f_i\ not\ intersected]\ \ \ \ (linearity\ of\ expectation) \\
+	&= \sum_{i=1}^m \Pr[f_i\ not\ intersected] \\
+	&= \sum_{i=1}^m (\frac{(1_n^T-A_i) x^*}{\tau^*(F)})^s \\
+	&= \frac{1}{(\tau^*(F))^s} \cdot \sum_{i=1}^m ( (1_n^T-A_i) x^*)^s \\
+	\end{align}
 %%%% f)
 \item
 	\begin{enumerate}[(i)]
