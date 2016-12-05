@@ -25,7 +25,7 @@
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
 \usepackage{extramarks} % Required for headers and footers
-\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage[usenames,dvipsnames]{color} % Required for custom colours
 \usepackage{graphicx} % Required to insert images
 \usepackage{listings} % Required for insertion of code
 \usepackage{courier} % Required for the courier font
@@ -84,17 +84,17 @@
 %	CODE INCLUSION CONFIGURATION
 %----------------------------------------------------------------------------------------
 
-%\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+%\definecolour{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the colour used for comments
 %\lstloadlanguages{Pascal} % Load Pascal syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/%contrib/listings/listings.pdf
 %\lstset{language=Perl, % Use Pascal in this example
 %        frame=single, % Single frame around code
 %        basicstyle=\small\ttfamily, % Use small true type font
-%        keywordstyle=[1]\color{Blue}\bf, % Pascal functions bold and blue
-%        keywordstyle=[2]\color{Purple}, % Pascal function arguments purple
-%        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+%        keywordstyle=[1]\colour{Blue}\bf, % Pascal functions bold and blue
+%        keywordstyle=[2]\colour{Purple}, % Pascal function arguments purple
+%        keywordstyle=[3]\colour{Blue}\underbar, % Custom functions underlined and blue
 %        identifierstyle=, % Nothing special about identifiers                                         
-%        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
-%        stringstyle=\color{Purple}, % Strings are purple
+%        commentstyle=\usefont{T1}{pcr}{m}{sl}\colour{MyDarkGreen}\small, % Comments small dark green courier font
+%        stringstyle=\colour{Purple}, % Strings are purple
 %        showstringspaces=false, % Don't put marks in string spaces
 %        tabsize=5, % 5 spaces per tab
 %        %
@@ -107,10 +107,10 @@
 %        % Put user defined functions here
 %        morekeywords=[3]{test},
 %        %
-%        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+%        morecomment=[l][\colour{Blue}]{...}, % Line continuation (...) like blue comment
 %        numbers=left, % Line numbers on left
 %        firstnumber=1, % Line numbers start with line 1
-%        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+%        numberstyle=\tiny\colour{Blue}, % Line numbers are blue and small
 %        stepnumber=5 % Line numbers go in steps of 5
 %}
 
@@ -126,10 +126,10 @@
   columns=flexible,
   basicstyle={\small\ttfamily},
   numbers=none,
-  numberstyle=\tiny\color{gray},
-  keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
+  numberstyle=\tiny\colour{gray},
+  keywordstyle=\colour{blue},
+  commentstyle=\colour{dkgreen},
+  stringstyle=\colour{mauve},
   breaklines=true,
   breakatwhitespace=true,
   tabsize=3
@@ -235,17 +235,17 @@
 %%%%% a)
 \item
 	For the sake of contradiction, let's assume \(\tau(F) < \mu(F)\).\\
-	Say \( \tau(F) = min\ |T| = k\). Sizes of sets must be integers, hence \(k \in \mathbb{N}\). It follows directly that \(\mu(F)=max\ |M| \geq k+1\). The latter expresses that \(k+1\) flags can be simultaneously  represented without assigning a dancer to more than one flag. These \(k+1\) flags of the Olympic matching are by definition pairwise dstinct, meaning that no color is present in more than one of those flags. \\
-	By definition, an Olympic traversal has to pass all flags and thereby also the \(k+1\) flags in the Olympic matching. However, as those flags are mutually distinct, the necessary amount of colors to traverse the matching is \(k+1\). This number can only increase when adding colors to traverse flags which are not part of the Olympic matching. Hence \(\tau(F) \geq k+1 \). \\
+	Say \( \tau(F) = min\ |T| = k\). Sizes of sets must be integers, hence \(k \in \mathbb{N}\). It follows directly that \(\mu(F)=max\ |M| \geq k+1\). The latter expresses that \(k+1\) flags can be simultaneously  represented without assigning a dancer to more than one flag. These \(k+1\) flags of the Olympic matching are by definition pairwise dstinct, meaning that no colour is present in more than one of those flags. \\
+	By definition, an Olympic traversal has to pass all flags and thereby also the \(k+1\) flags in the Olympic matching. However, as those flags are pairwise distinct, the necessary amount of colours to traverse the matching is \(k+1\). This number can only increase when adding colours to traverse flags which are not part of the Olympic matching. Hence \(\tau(F) \geq k+1 \). \\
 	This contradicts are assumption. Therefore we have proven that \( \mu(F) \leq \tau(F) \). 
 
 %%%%% b)
 \item
 	Firstly, we need to show that such a \( \tau^{*}(F)\) exists. In order to do so we demonstrate that LP-T is bounded and feasible, which implies existance of an optimal solution. \\
-	The cost function increases with every component of x. This is to say that it will attain minimal value if the components of x are 'as small as possible'. However, due to the constraint that \(x \geq 0 \), we know that the components of \(x\) must be at least \(0\). When can thereby formulate the lower bound \( 1_n^T 0_n = 0 \) for the minimized result. Thusly, LP-T is bounded. \\
-	In order to show that LP-T is feasible, we will look at the structure of \(A\). The matrix knowingly consists of solely \(0's\) and \(1's\). Using the information that each flag uses at least one colour, we can tell that every row holds at least one \(1\). In order to satisfy the constraint that the dotproduct of each row with \(x\) is larger or equal to \(1\), we can simply set all components of \(x\) to \(1\). Furthermore, \(x = 1_n\) also trivially satisfies the remaining constraint, namely \(x \leq 0\). Thererfore \(x\) is a witness for feasibility of LP-T. \\
+	The cost function increases with every component of x. This is to say that it will attain minimal value if the components of x are 'as small as possible'. However, due to the constraint that \(x \geq 0 \), we know that the components of \(x\) must be at least \(0\). Thus, we can formulate the lower bound \( 1_n^T 0_n = 0 \) for the minimized result. It follows that LP-T is bounded. \\
+	In order to show that LP-T is feasible, we will look at the structure of \(A\). The matrix solely consists of \(0's\) and \(1's\). Using the information that each flag comprises at least one colour, we can tell that every row holds at least one \(1\). In order to satisfy the constraint that the dotproduct of each row with \(x\) is larger or equal 1, we simply set all components of \(x\) to \(1\). Furthermore, \(x = 1_n\) also trivially satisfies the remaining constraint, namely \(x \leq 0\). Thererfore \(x\) witnesses the feasibility of LP-T. \\
 	We now know that LP-T is bounded, feasible and thereby has an optimal solution \( \tau^{*}(F) \). \\
-	When closeely observing the definition of \( T\) and \(\tau(F)\), it becomes apparent, that we can express it as an integer linear program with strong resemblance to LP-T. Instead of declaring \(T\) as a set, we can express \(T\) as the vector \(x\), indicating \(x_i = \mathbb{I}[c_i \in T ]\). It follows directly that \( \tau(F) = |T| = \sum_{i=1}^{n} x_i = 1_n ^Tx \). The constraint that the traversal \(x\) must include at least one color of each flag, can be enforced by counting the number of colors each flag and the traversal have in common and making sure this count is always at least 1. This corresponds to the dotproduct between a row of \(A\), representing the colors in a flag, and the traversal \(x\). We can thereby formulate \(\tau(F)\) as the optimal value resulting from:
+	When closeely observing the definition of the traversal \( T\) and \(\tau(F)\), it becomes apparent, that we can express it as an integer linear program with strong resemblance to LP-T. Instead of declaring \(T\) as a set, we can express \(T\) equivalently as the vector \(x\), indicating \(x_i = \mathbb{I}[c_i \in T ]\). It follows directly that \( \tau(F) = |T| = \sum_{i=1}^{n} x_i = 1_n ^Tx \). The constraint that the traversal \(x\) must include at least one colour of each flag, can be enforced by counting the number of colours each flag and the traversal have in common and making sure this count is always at least 1. This corresponds to the dotproduct of a row of \(A\), representing the colours in a flag, and the traversal \(x\). We can thereby formulate \(\tau(F)\) as the optimal value resulting from:
 	\[ minimize\ 1_n^Tx,\ subject\ to\ Ax \geq 1_m,\ x \in \{0,1\}^n 
 	\]
 	We can argue analogously that this integer linear program has an optimal value. \\
@@ -253,7 +253,7 @@
 
 %%%%% c)
 \item
-	Suppose the flags \( f_1 = \{c1,c2\},\ f_2 = \{c1,c3\},\ f_3 = \{c2,c3\} \). \\
+	Consider the flags \( f_1 = \{c1,c2\},\ f_2 = \{c1,c3\},\ f_3 = \{c2,c3\} \). \\
 	In other words:
 	\[
 	A = \begin{bmatrix}
@@ -262,8 +262,8 @@
 		0 & 1 & 1 \\
 	\end{bmatrix}
 	\]
-	We see that no color is contained in all three flags. Hence the traversal will require at least two colors. We write \( \tau(F) \geq 2 \). 
-	Let us inspect \( x_S = \begin{bmatrix}
+	We see that no colour is contained in all three flags. Hence the traversal will require at least two colours. We write \( \tau(F) \geq 2 \). 
+	Let us inspect \( x_s = \begin{bmatrix}
 		0.5 & 0.5 & 0.5 \\
 	\end{bmatrix}^T \). Firstly, our \(x_s\) satisfies \(x \geq 0_n\). Secondly 
 	\[
@@ -281,34 +281,32 @@
 		1 \\
 	\end{bmatrix} \geq 1_m.
 	\]
-	Thereby, we can conclude that \(x_s\) is a feasible solution for LP-T. Furthermore, the optimal value \(\tau^{*} (F) \) must be smaller or equal to the value that the cost function yields for $x_s$. This follows from the simple fact that the cost function is minimizing. Hence \(\tau^{*}(F) <= 1_n^T \cdot x_s = 1.5\). \\
-	It follows directly that \(\tau^{*}(F) \leq \tau(F) \).
+	Thereby, we can conclude that \(x_s\) is a feasible solution for LP-T. Furthermore, the optimal value \(\tau^{*} (F) \) must be smaller or equal to the value that the cost function yields for $x_s$. This follows from the simple fact that the cost function is minimizing. Hence \(\tau^{*}(F) \leq 1_n^T \cdot x_s = 1.5\). \\
+	It follows directly that \(\tau^{*}(F) < \tau(F) \).
 	
 %%%% d)
 \item
-	In order to prove \(\mu(F) \leq \tau(F) \) we will first show \( \mu(F) \leq \mu^{*}(F)\) followed by \( \mu^{*}(F) \leq \tau(F) \). \\
+	In order to prove \(\mu(F) \leq \tau^*(F) \) we will first show \( \mu(F) \leq \mu^{*}(F)\) followed by \( \mu^{*}(F) \leq \tau^*(F) \). \\
 	We define \( \mu^{*}(F) \) to be the optimal value of the following linear program LP-D: \\
 	\[ maximize\ 1_m^T y\ subject\ to\ A^Ty \leq 1,\ y \geq 0
 	\]
-	We observe that LP-D corresponds to the definition of the dual of LP-T. As we have shown that LP-T is bounded and has optimal value \(\tau^{*}(F)\), the Strong Duality Theorem tells us that LP-D has optimal value \(\tau^{*}(F)\). \\
+	We observe that LP-D corresponds to the definition of the dual of LP-T. As we have shown that LP-T is bounded and has optimal value \(\tau^{*}(F)\), the Strong Duality Theorem tells us that LP-D has optimal value \(\mu^{*}(F) = \tau^{*}(F)\). \\
 	Similarly as in (b), we will translate the meaning of an Olympic matching \(M\) to an integer linear program and show that this integer linear program is only more constrained than LP-D. \\
-	Instead of declaring \(M\) as a set, we can express \(M\) as the vector \(y\), indicating \(y_i = \mathbb{I}[f_i \in M]\). It follows directly that \( \mu(F) = |M| = \sum_{i=1}^{m} y_i = 1_m ^Ty \). The constraint that the matching \(y\) must assign each color to at most one flag, i.e. the flags are pairwise distinct, can be enforced by counting the number of flags each color appears in and making sure this count is always at most 1. This corresponds to the dotproduct between a row of \(A^T\), representing for all flags whether they contain a specific color, and the matching \(y\). We can thereby formulate \(\mu(F)\) as the optimal value resulting from:
+	Instead of declaring \(M\) as a set, we can express \(M\) as the vector \(y\), indicating \(y_i = \mathbb{I}[f_i \in M]\). It follows directly that \( \mu(F) = |M| = \sum_{i=1}^{m} y_i = 1_m ^Ty \). The constraint that the matching \(y\) must assign each colour to at most one flag, i.e. the flags are pairwise distinct, can be enforced by counting the number of flags each colour appears in and making sure this count is always at most 1. This corresponds to the dotproduct between a row of \(A^T\), representing for all flags whether they contain a specific colour, and the matching \(y\). We can thereby formulate \(\mu(F)\) as the optimal value resulting from:
 	\[ maximize\ 1_m^T y\ subject\ to\ A^Ty \leq 1,\ y \in \{0,1\}^m
 	\]
 	\(y = 1_m\) yields an upper lower bound for \(\mu(F)\), namely \(1_m^{T}1_m = m\). \(y = 0_m\) yields an obvious feasible solution. Hence the integer linear program has an optimal solution \(\mu(F)\). \\
-	The integer LP we came to formulate is only more restrictive than LP-D. Hence, a matching \(y\) leading to the optimal value for the integer linear program, will yield the same value for LP-D. Yet, LP-T might allow for an even better, i.e. larger, solution, as it is less restrictive and maximizing the cost function. We have proven that \(\mu(F) \leq \mu^{*}(F)\).
+	The integer LP we came to formulate is only more restrictive than LP-D. Hence, a matching \(y\) leading to the optimal value for the integer linear program, will yield the same value for LP-D. Yet, LP-D might allow for an even better, i.e. larger, solution, as it is less restrictive and maximizing the cost function. We have proven that \(\mu(F) \leq \mu^{*}(F)\).
 	
-	Thanks to the Strong Duality Theorom we know that \(\mu^{*}(F) = \tau^{*}(F)\). (b) tells us that \(\tau^{*}(F) \leq \tau(F)\) which implies \(\mu^{*}(F) \leq \tau(F)\).
-	
-	We have proven that \(\mu(F) \leq \tau(F) \).
+	We have proven that \(\mu(F) \leq \tau^*(F) \).
 
 %%%% e)
 \item
-	Let's inspect the probablity to intersect a specific flag when drawing a color according to \(p\). We intersecting if we fraw any of the colors containted in the flag. Using \(p\), this gives us:
+	Let's inspect the probablity to intersect a specific flag when drawing a colour according to \(p\). We intersecting if we fraw any of the colours containted in the flag. Using \(p\), this gives us:
 	\[ \Pr [f_i] = \frac{\sum_{j=1}^n \mathbb{I}[c_j \in f_k]\cdot x_i^*} {\sum_{j=1}^n x_j^*} = \frac{A_i x^*}{\sum_{j=1}^n x_j^*} = \frac{A_i x^*}{\tau^*(F)}\]
-	The probability of not intersecting a certain flag upon drawing a color is hence:
+	The probability of not intersecting a certain flag upon drawing a colour is hence:
 	\[1 - \Pr [f_i] = \frac{\tau^*(F)}{\tau^*(F)} - \frac{A_i x^*}{\tau^*(F)} = \frac{1_n^Tx^*-A_i x^*}{\tau^*(F)} = \frac{(1_n^T-A_i) x^*}{\tau^*(F)}\] 
-	The probability of not intersecting a certain flag upon drawing s colors, possibly with repetitions, is hence:
+	The probability of not intersecting a certain flag upon drawing s colours, possibly with repetitions, is hence:
 	\[(1 - \Pr [f_i])^s = (\frac{(1_n^T-A_i) x^*}{\tau^*(F)})^s\]
 	After such handy clarifications, let's look at what we actually want to show.
 	\begin{align}
@@ -327,9 +325,9 @@
 		Thanks to the special structure of \(A\), we know that each row contains exactly two \(1\)'s and all other components equal \(0\). \\
 		If \(m < n\), we know that \( rank(A) \leq dim(rowspace(A)) \leq m\).
 		We also know that \( number\ lin.\ ind.\ colums = rank(A) \). Hence \(number\ lin.\ ind.\ colums \leq m < n\). Therefore the columns are linearly dependent. \\
-		If \(m \geq n \), we proceed by contradiction. Let's assume that \(A\) has n linear independent columns and hence \(rank(A) = n\). The 'rank-nullity theorem' tells us that \( n = rank(A) + dim(kernel(A)) \). Therefore the dimension of the kernel is 0 and \(Av = 0\) can only hold for \(v = 0\). Say there are \(k \) light colors and hence \(n-k\) dark colors. We construct the vector:
+		If \(m \geq n \), we proceed by contradiction. Let's assume that \(A\) has n linear independent columns and hence \(rank(A) = n\). The 'rank-nullity theorem' tells us that \( n = rank(A) + dim(kernel(A)) \). Therefore the dimension of the kernel is 0 and \(Av = 0\) can only hold for \(v = 0\). Say there are \(k \) light colours and hence \(n-k\) dark colours. We construct the vector:
 		\[v_0 \in \{0,1\}^n,\ v_0[i] = \begin{cases}1\ & if\ c_i\ bright\\ -1\ & otherwise\end{cases}\]
-		As we know that each row of \(A\) contains a 1 for exactly one bright and one dark color and all other elements 0, all of the multiplications between rows and \(v_0\) will return 0. In other words, \(v \neq 0, Av = 0\). Therefore the kernel of A must have at least dimension 1. This contradicts our assumption that A has rank n. Thereby, A cannot have n linearly independent columns. 
+		As we know that each row of \(A\) contains a 1 for exactly one bright and one dark colour and all other elements 0, all of the multiplications between rows and \(v_0\) will return 0. In other words, \(v \neq 0, Av = 0\). Therefore the kernel of A must have at least dimension 1. This contradicts our assumption that A has rank n. Thereby, A cannot have n linearly independent columns. 
 	%%%%% ii)
 	\item
 	In order to show that for each square submatrix \(S\) of \(A\) \(det|S| \in \{-1,0,1\} \), we will proceed by induction. We will say that \(S\) is of size \(i\) by \(i\). \\
@@ -344,7 +342,7 @@
 		\item There is no row in row in \(S\) with all \(0\)'s, there is one row in \(S\) with exactly one \(1\). \\
 			\(det|S|\) will be calculated by adding the determinant of all minors, scaled by the corrsponding elements of the row. Hence all determinants of minors but one, call it \(M\) can be ignored. Our induction hypotehsis tells us that \(det|M| \in \{-1,0,1\} \) because \(M\) is of size \(i\) by \(i\) and by definition a submatrix of \(A\). Hence \(det|S|=1\cdot det|M|\) which direcly implies our claim.
 		\item There are only rows in \(S\) with exactly two \(1\)'s. \\
-			We have two crucial indications about this \(S\). The first one is that it is a submatrix of \(A\). This implies that it has to fulfill the requirement that if two colors are chosen in one row, one of them must be light and the orther dark. We do not reassign colors, hence this must still hold. The second one is that we have two colors in each row of \(S\). \\
+			We have two crucial indications about this \(S\). The first one is that it is a submatrix of \(A\). This implies that it has to fulfill the requirement that if two colours are chosen in one row, one of them must be light and the orther dark. We do not reassign colours, hence this must still hold. The second one is that we have two colours in each row of \(S\). \\
 			Hence \(S\) would represent a legitimate incidence matrix according to the definition of (f). \\
 			Yet we came to prove in (f)(i), that all incidence matrices as described in (f) do have linearly dependent columns. In the case of square matrices, this implies that they are not 'full-rank' or 'invertible'. This again implies that the determinant must be 0. We can conclude \(det|S|=0 \)/
 	\end{enumerate} 
