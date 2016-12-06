@@ -330,7 +330,18 @@
 	& \Leftrightarrow -s \leq \tau^*(F) \cdot ln(\frac{1}{m})\ \ \ \ \ (tau^*(F) \geq 1) \\
 	& \Leftrightarrow s \geq \tau^*(F) \cdot ln(m)
 	\end{align}
-	In other words, we know that for any \(s\) larger than \(\tau^*(F) \cdot ln(m) \), the expected number of not intersected flags is smaller or equal 1. Therfore we know that we can traverse \(m-1\) flags with \(\tau^*(F) \cdot ln(m) \) many colours. Hence, with \(\tau^*(F) \cdot ln(m) + 1\) colours, we are able to traverse all flags by adding one colour from the remaining flag. We know that an Olympic traversal must be possible with \(\tau^*(F) \cdot ln(m) + 1\) colours, yet could possible be enhanced. Thereby \(\tau(F) \leq \tau^*(F) \cdot ln(m) + 1\). 
+	In other words, we know that for any \(s\) larger or equal \(\ceil{\tau^*(F) \cdot ln(m)} \), the expected number of not intersected flags is smaller or equal 1. Therfore we know that we can traverse \(m-1\) flags with \(\ceil{\tau^*(F) \cdot ln(m)} \) many colours. Hence, with \(\ceil{\tau^*(F) \cdot ln(m)} + 1\) colours, we are able to traverse all flags by adding one colour from the remaining flag. We know that an Olympic traversal must be possible with \(\ceil{\tau^*(F) \cdot ln(m)} + 1\) colours, yet this could be enhanced. \\
+	We know that we can possibly not intersect \(n-1\) with \(s\) draws by drawing s timess the same colour. In other words, the probability of not intersecting \(> 1 \) flags is not zero for any s. Hence for any s having expected \(\leq 1\), there must also be ways of not intersecting \(0\) flags.
+	\begin{align}
+	\mathbb{E}[\# flags\ not\ intersected\ by\ s\ draws] &= \sum_{i=0}^{n-1} i\cdot \Pr[\# flags\ not\ intersected\ by\ s\ draws = i] \\
+	&= 0 \cdot p_0 + \sum_{i=1}^{n-1} i\cdot p_i \\
+	& \geq 0 \cdot p_0 + (1+\epsilon)(1-p_0)\ \ \ \ for\ some\ \epsilon > 0\\
+	& \geq (1+\epsilon)(1-p_0)
+	\end{align}
+	We have:
+	\[(1+\epsilon)(1-p_0) \leq  \mathbb{E}[\# flags\ not\ intersected\ by\ s\ draws] \leq 1\]
+	Trivially, \(p_0\) cannot be 0. This means that there is a way to intersect all flags with \(s=\ceil{\tau^*(F) \cdot ln(m)}\) colours. Furthermore, we have \(s=\ceil{\tau^*(F) \cdot ln(m)} \leq \tau^*(F) \cdot ln(m) + 1\). As \(\tau(F)\) is defined to be the minimal amount of colours to intersect all flags, we have:
+	\[\tau(F) \leq \ceil{\tau^*(F) \cdot ln(m)} \leq \tau^*(F) \cdot ln(m) + 1 \].
 	
 %%%% f)
 \item
