@@ -399,11 +399,12 @@
 		We now know that we can add the constraint \(x \in \{0,1\}^n\) to LP-T without influencing the optimal value \(\tau^*(F)\). Yet this corresponds exactly to the integer Linear Program with optimal value \(\tau(F)\), as formulated in (b). Hence \(\tau^*(F) = \tau(F)\). 
 		
 	%%%%% v)
-	\item The proof of this statement will go along the lines of Koenig's theorem in graph theory. \\
-	Firstly, we turn our problems of \(M\) and \(T\) into graph problems. Let us consider the the colours to represented as the set of nodes \(V\). As a flag consists of two colours, we will represent the flags as the set of edges \(E\). Furthermore, we are aware of the fact that no two light and no two dark colours will be contained in an edge, i.e. not connected by an edge. This corresponds to the definition of a bipartite graph with disjoint sets representing light and dark colours. \\
-	The problem of finding an Olympic matching \(M\), namely selecting a maximal number of flags, while never using a colour twice translates to finding a maximum matching of our graph. This is the case, because in the maximum matching, we select a maximum number of edges, representing flags, whith no two edges being adjacent, i.e. no colour is part of two flags. \\
+	\item 
+	%The proof of this statement will go along the lines of Koenig's theorem in graph theory. \\
+	Firstly, we turn our problems of finding \(M\) and \(T\) into graph problems. Let the colours be represented as the set of nodes \(V\). As a flag consists of precisely two colours, we will represent the flags as the set of edges \(E\). Furthermore, we are aware of the fact that no two light and no two dark colours, i.e. nodes, will be contained in an edge, i.e. not connected by an edge. This corresponds to the definition of a bipartite graph with disjoint sets representing light and dark colours. \\
+	The problem of finding an Olympic matching \(M\), namely selecting a maximal number of flags, while never using a colour twice translates to finding a maximum matching of our graph. This is the case, because the maximum matching corresponds a maximum number of edges, representing flags, with no two edges being adjacent, i.e. no colour being part of two flags. \\
 	The problem of finding an Olympic traversal \(T\), namely selecting a minimal number of colours, such that all flags contain at least one of those colours translates to finding the vertex cover of our graph. This is the case, because in the vertex cover, we select a minimum number of nodes, representing colours, such that all edges are connecting one of the selected nodes, i.e. each flag is repreented by at least one colour. \\
-	As we have shown existence of the existence of optimal solutions to integer linear programs in (b) and (d), \(\mu(F)\) and \(\tau(F)\) represent the sizes of a maximum matching and a minimum vertex cover respectively. 
+	As we have shown existence of the existence of optimal solutions to integer linear programs in (b) and (d), \(\mu(F)\) and \(\tau(F)\) represent the sizes of a maximum matching and a minimum vertex cover respectively and exist. Fortunately, graph theory's fundamental Koenig's theorem tells us that the size of the maximum matching of a bipartite graph equal the size of a minimum vertex cover. This directly implies \(\mu(F) = \tau(F)\). 
 	
 	\end{enumerate}
 	
